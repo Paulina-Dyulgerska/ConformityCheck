@@ -15,9 +15,11 @@ namespace ConformityCheck.Models
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(20)]
         public string Number { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string Description { get; set; }
 
         public virtual ICollection<ArticleProduct> Products { get; set; }

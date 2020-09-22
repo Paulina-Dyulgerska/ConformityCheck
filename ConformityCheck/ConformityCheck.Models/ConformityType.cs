@@ -15,6 +15,7 @@ namespace ConformityCheck.Models
         public int Id { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string Description { get; set; }
 
         public virtual ICollection<Conformity> Conformities { get; set; }

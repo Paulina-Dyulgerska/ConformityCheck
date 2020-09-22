@@ -8,7 +8,7 @@ namespace ConformityCheck.ConsoleApplication
         static void Main(string[] args)
         {
             var db = new ConformityCheckContext();
-
+            db.Database.EnsureDeleted();
             db.Database.EnsureCreated();
         }
     }

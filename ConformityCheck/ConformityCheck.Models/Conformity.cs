@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ConformityCheck.Models
 {
@@ -15,8 +16,9 @@ namespace ConformityCheck.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public ConformityType ConformityType { get; set; }
+        [ForeignKey(nameof(ConformityType))]
+        public int ConformityTypeId { get; set; }
+        public virtual ConformityType ConformityType { get; set; }
 
         [Required]
         public bool IsConfirmed { get; set; }
