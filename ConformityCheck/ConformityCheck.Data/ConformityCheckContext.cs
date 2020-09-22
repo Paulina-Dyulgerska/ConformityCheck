@@ -29,6 +29,11 @@ namespace ConformityCheck.Data
 
         public DbSet<RegulationList> RegulationLists { get; set; }
 
+        public DbSet<Supplier> Suppliers { get; set; }
+
+        public DbSet<Declaration> Declarations { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -131,7 +136,21 @@ namespace ConformityCheck.Data
                 .HasIndex(s => s.CASNumber)
                 .IsUnique();
 
-            //modelBuilder.Entity<RegulationList>(); //da mu slagam li neshto ne znam oshte!
+            modelBuilder.Entity<Supplier>() //da setna da se nulira zapisa na SupplierID v Article pri delete 
+                //na Supplier - TODO!
+            .HasMany(s => s.Articles)
+            .WithOne(a => a.Supplier)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Article>()
+            .HasOne(a => a.Supplier)
+            .WithMany(s => s.Articles)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            //TODO declarations
+            //TODO connection declaration -> supplier -> article -> conformityarticle ->
+
+            //modelBuilder.Entity<RegulationList>(); //da mu slagam li neshto ne znam oshte! TODO
         }
     }
 }
