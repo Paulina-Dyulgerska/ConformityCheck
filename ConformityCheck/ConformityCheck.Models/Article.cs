@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ConformityCheck.Models
 {
@@ -22,6 +23,11 @@ namespace ConformityCheck.Models
         [Required]
         [MaxLength(50)]
         public string Description { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(Supplier))]
+        public int SupplierID { get; set; }
+        public Supplier Supplier { get; set; }
 
         public virtual ICollection<ArticleProduct> Products { get; set; }
 

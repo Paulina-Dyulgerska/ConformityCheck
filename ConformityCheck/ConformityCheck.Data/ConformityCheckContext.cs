@@ -109,10 +109,15 @@ namespace ConformityCheck.Data
                 .WithMany(ct => ct.Conformities)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<ConformityType>()
-                .HasMany(ct => ct.Conformities)
+            modelBuilder.Entity<ConformityType>(e =>
+            {
+                e.HasMany(ct => ct.Conformities)
                 .WithOne(c => c.ConformityType)
                 .OnDelete(DeleteBehavior.Restrict);
+
+                e.HasIndex(ct => ct.Description)
+                .IsUnique();
+            });
 
             modelBuilder.Entity<Article>()
                 .HasIndex(a => a.Number)
