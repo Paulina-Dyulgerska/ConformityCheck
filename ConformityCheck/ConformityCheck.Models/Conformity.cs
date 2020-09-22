@@ -20,7 +20,6 @@ namespace ConformityCheck.Models
         public int ConformityTypeId { get; set; }
         public virtual ConformityType ConformityType { get; set; }
 
-        [Required]
         public bool IsConfirmed { get; set; }
 
         public DateTime? ConformationDate { get; set; }

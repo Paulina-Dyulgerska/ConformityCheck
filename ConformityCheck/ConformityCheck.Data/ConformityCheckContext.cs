@@ -25,7 +25,7 @@ namespace ConformityCheck.Data
 
         public DbSet<Conformity> Conformities { get; set; }
 
-
+        public DbSet<Substance> Substances { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -44,7 +44,7 @@ namespace ConformityCheck.Data
                 e.HasOne(ap => ap.Article)
                 .WithMany(p => p.Products)
                 .HasForeignKey(ap => ap.ArticleId);
-                
+
                 e.HasOne(ap => ap.Product)
                 .WithMany(a => a.Articles)
                 .HasForeignKey(ap => ap.ProductId);
@@ -76,6 +76,19 @@ namespace ConformityCheck.Data
                 .HasForeignKey(p => p.ConformityId);
             });
 
+            modelBuilder.Entity<ArticleSubstance>(e =>
+            {
+                e.HasKey(x => new { x.ArticleId, x.SubstanceId });
+
+                e.HasOne(asub => asub.Article)
+                .WithMany(a => a.Substances)
+                .HasForeignKey(s => s.ArticleId);
+
+                e.HasOne(asub => asub.Substance)
+                .WithMany(s => s.Articles)
+                .HasForeignKey(a => a.SubstanceId);
+            });
+
             modelBuilder.Entity<Conformity>()
                 .HasOne(c => c.ConformityType)
                 .WithMany(ct => ct.Conformities)
@@ -92,6 +105,10 @@ namespace ConformityCheck.Data
 
             modelBuilder.Entity<Product>()
                 .HasIndex(p => p.Number)
+                .IsUnique();
+
+            modelBuilder.Entity<Substance>()
+                .HasIndex(s => s.CASNumber)
                 .IsUnique();
         }
     }
