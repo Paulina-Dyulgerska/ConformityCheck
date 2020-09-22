@@ -27,6 +27,8 @@ namespace ConformityCheck.Data
 
         public DbSet<Substance> Substances { get; set; }
 
+        public DbSet<RegulationList> RegulationLists { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -89,6 +91,19 @@ namespace ConformityCheck.Data
                 .HasForeignKey(a => a.SubstanceId);
             });
 
+            modelBuilder.Entity<SubstanceRegulationList>(e =>
+            {
+                e.HasKey(x => new { x.RegulationListId, x.SubstanceId });
+
+                e.HasOne(srl => srl.RegulationList)
+                .WithMany(rl => rl.Substances)
+                .HasForeignKey(s => s.RegulationListId);
+
+                e.HasOne(srl => srl.Substance)
+                .WithMany(s => s.RegulationLists)
+                .HasForeignKey(rl => rl.SubstanceId);
+            });
+
             modelBuilder.Entity<Conformity>()
                 .HasOne(c => c.ConformityType)
                 .WithMany(ct => ct.Conformities)
@@ -110,6 +125,8 @@ namespace ConformityCheck.Data
             modelBuilder.Entity<Substance>()
                 .HasIndex(s => s.CASNumber)
                 .IsUnique();
+
+            //modelBuilder.Entity<RegulationList>(); //da mu slagam li neshto ne znam oshte!
         }
     }
 }

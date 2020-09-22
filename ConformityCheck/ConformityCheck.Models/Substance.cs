@@ -8,6 +8,7 @@ namespace ConformityCheck.Models
         public Substance()
         {
             this.Articles = new HashSet<ArticleSubstance>();
+            this.RegulationLists = new HashSet<SubstanceRegulationList>();
         }
 
         [Key]
@@ -20,6 +21,8 @@ namespace ConformityCheck.Models
         [Required]
         [MaxLength(100)]
         public string Description { get; set; }
+
+        public virtual ICollection<SubstanceRegulationList> RegulationLists { get; set; }
 
         public virtual ICollection<ArticleSubstance> Articles { get; set; }
     }
