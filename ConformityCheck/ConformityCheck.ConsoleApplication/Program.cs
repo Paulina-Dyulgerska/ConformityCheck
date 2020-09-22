@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConformityCheck.Data;
+using System;
 
 namespace ConformityCheck.ConsoleApplication
 {
@@ -6,7 +7,9 @@ namespace ConformityCheck.ConsoleApplication
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var db = new ConformityCheckContext();
+
+            db.Database.EnsureCreated();
         }
     }
 }
