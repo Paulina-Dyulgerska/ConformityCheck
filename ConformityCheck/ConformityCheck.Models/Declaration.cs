@@ -26,5 +26,7 @@ namespace ConformityCheck.Models
         public DateTime? AcceptanceDate { get; set; }
 
         public bool IsAccepted { get; set; }
+
+        //TODO - list of Articles -> many-to-many or An Article?????
     }
 }
