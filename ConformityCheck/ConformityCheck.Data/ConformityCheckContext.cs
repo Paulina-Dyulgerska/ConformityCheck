@@ -1,8 +1,5 @@
 ﻿using ConformityCheck.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ConformityCheck.Data
 {
@@ -35,7 +32,7 @@ namespace ConformityCheck.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=ConformityCheck;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=ConformityCheck;Integrated Security=True;");
             }
         }
 
@@ -142,16 +139,13 @@ namespace ConformityCheck.Data
             {
                 e.HasMany(ct => ct.Conformities)
                 .WithOne(c => c.ConformityType)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict); //ne moje da se iztrie ConformityType, predi
+                                                    //da se iztriqt vsichki Conformities, koito sa ot tozi type!
 
                 e.HasIndex(ct => ct.Description)
                 .IsUnique();
             });
 
-            modelBuilder.Entity<Conformity>()
-                .HasOne(c => c.ConformityType)
-                .WithMany(ct => ct.Conformities)
-                .OnDelete(DeleteBehavior.Restrict);
 
             //da setna da se nulira zapisa na SupplierID v Article pri del 
             //na Supplier - TODO! 
@@ -162,7 +156,8 @@ namespace ConformityCheck.Data
             //modelBuilder.Entity<Supplier>()
             //    .HasMany(s => s.Articles)
             //    .WithOne(a => a.Supplier)
-            //    .OnDelete(DeleteBehavior.Restrict);
+            //    .OnDelete(DeleteBehavior.Restrict);//ne moje da se iztrie Supplier, predi
+            //da se iztriqt vsichki Articles, koito sa s tozi Supplier!
         }
     }
 }
