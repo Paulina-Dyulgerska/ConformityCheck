@@ -6,10 +6,10 @@ namespace ConformityCheck.Models
     {
         [ForeignKey(nameof(Article))]
         public int ArticleId { get; set; }
-        public Article Article { get; set; }
+        public virtual Article Article { get; set; }
 
         [ForeignKey(nameof(Conformity))]
         public int ConformityId { get; set; }
-        public Conformity Conformity { get; set; }
+        public virtual Conformity Conformity { get; set; }
     }
 }

@@ -6,10 +6,10 @@ namespace ConformityCheck.Models
     {
         [ForeignKey(nameof(Product))]
         public int ProductId { get; set; }
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
 
         [ForeignKey(nameof(Conformity))]
         public int ConformityId { get; set; }
-        public Conformity Conformity { get; set; }
+        public virtual Conformity Conformity { get; set; }
     }
 }

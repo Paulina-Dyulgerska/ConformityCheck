@@ -27,7 +27,7 @@ namespace ConformityCheck.Models
 
         [ForeignKey(nameof(Supplier))]
         public int? MainSupplierID { get; set; }
-        public Supplier MainSupplier { get; set; }
+        public virtual Supplier MainSupplier { get; set; }
 
         public virtual ICollection<ArticleProduct> Products { get; set; }
 

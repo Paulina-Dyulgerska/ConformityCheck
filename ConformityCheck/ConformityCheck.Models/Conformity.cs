@@ -23,7 +23,7 @@ namespace ConformityCheck.Models
         [Required]
         [ForeignKey(nameof(Supplier))]
         public int SupplierId { get; set; }
-        public Supplier Supplier { get; set; }
+        public virtual Supplier Supplier { get; set; }
 
         public DateTime IssueDate { get; set; }
 
