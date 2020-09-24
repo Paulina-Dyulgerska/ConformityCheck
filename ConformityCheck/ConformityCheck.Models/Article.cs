@@ -11,6 +11,7 @@ namespace ConformityCheck.Models
             this.Products = new HashSet<ArticleProduct>();
             this.Conformities = new HashSet<ArticleConformity>();
             this.Substances = new HashSet<ArticleSubstance>();
+            this.Suppliers = new HashSet<ArticleSupplier>();
         }
 
         [Key]
@@ -24,15 +25,16 @@ namespace ConformityCheck.Models
         [MaxLength(50)]
         public string Description { get; set; }
 
-        [Required]
         [ForeignKey(nameof(Supplier))]
-        public int SupplierID { get; set; }
-        public Supplier Supplier { get; set; }
+        public int? MainSupplierID { get; set; }
+        public Supplier MainSupplier { get; set; }
 
         public virtual ICollection<ArticleProduct> Products { get; set; }
 
         public virtual ICollection<ArticleConformity> Conformities { get; set; }
 
         public virtual ICollection<ArticleSubstance> Substances { get; set; }
+
+        public virtual ICollection<ArticleSupplier> Suppliers { get; set; }
     }
 }

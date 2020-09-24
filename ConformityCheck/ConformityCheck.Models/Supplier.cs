@@ -7,7 +7,7 @@ namespace ConformityCheck.Models
     {
         public Supplier()
         {
-            this.Articles = new HashSet<Article>();
+            this.Articles = new HashSet<ArticleSupplier>();
         }
 
         [Key]
@@ -34,6 +34,6 @@ namespace ConformityCheck.Models
         [MaxLength(20)]
         public string ContactPersonLastName { get; set; }
 
-        public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<ArticleSupplier> Articles { get; set; }
     }
 }

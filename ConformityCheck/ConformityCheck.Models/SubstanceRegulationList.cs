@@ -13,7 +13,6 @@ namespace ConformityCheck.Models
         public int RegulationListId { get; set; }
         public RegulationList RegulationList { get; set; }
 
-        [Required]
         public string Restriction { get; set; }
     }
 }
