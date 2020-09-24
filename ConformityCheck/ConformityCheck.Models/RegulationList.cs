@@ -17,6 +17,12 @@ namespace ConformityCheck.Models
         [MaxLength(50)]
         public string Description { get; set; }
 
+        [Required]
+        public string Source { get; set; }
+
+        [Required]
+        public string SourceURL { get; set; }
+
         public virtual ICollection<SubstanceRegulationList> Substances { get; set; }
     }
 }

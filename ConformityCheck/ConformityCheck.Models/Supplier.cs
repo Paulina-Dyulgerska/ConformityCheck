@@ -21,11 +21,18 @@ namespace ConformityCheck.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
+        [Required]
+        [MaxLength(50)]
         public string Email { get; set; }
 
+        [MaxLength(20)]
         public string PhoneNumber { get; set; }
 
-        public string ContactPersonName { get; set; }
+        [MaxLength(20)]
+        public string ContactPersonFirstName { get; set; }
+
+        [MaxLength(20)]
+        public string ContactPersonLastName { get; set; }
 
         public virtual ICollection<Article> Articles { get; set; }
     }
