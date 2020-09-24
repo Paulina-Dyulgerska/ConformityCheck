@@ -4,7 +4,7 @@ namespace ConformityCheck.Models
 {
     public class ArticleConformity
     {
-        [ForeignKey(nameof(Article))]
+        [ForeignKey(nameof(Article))] //moga da gi iztriq vsichki takiwa
         public int ArticleId { get; set; }
         public virtual Article Article { get; set; }
 
