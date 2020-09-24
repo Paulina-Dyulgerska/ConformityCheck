@@ -93,6 +93,20 @@ namespace ConformityCheck.Data
                 .HasForeignKey(a => a.SubstanceId);
             });
 
+
+            modelBuilder.Entity<ArticleSupplier>(e =>
+            {
+                e.HasKey(x => new { x.ArticleId, x.SupplierId });
+
+                e.HasOne(asup => asup.Article)
+                .WithMany(a => a.Suppliers)
+                .HasForeignKey(s => s.ArticleId);
+
+                e.HasOne(asup => asup.Supplier)
+                .WithMany(s => s.Articles)
+                .HasForeignKey(a => a.SupplierId);
+            });
+            
             modelBuilder.Entity<SubstanceRegulationList>(e =>
             {
                 e.HasKey(x => new { x.RegulationListId, x.SubstanceId });
@@ -106,10 +120,23 @@ namespace ConformityCheck.Data
                 .HasForeignKey(rl => rl.SubstanceId);
             });
 
-            modelBuilder.Entity<Conformity>()
-                .HasOne(c => c.ConformityType)
-                .WithMany(ct => ct.Conformities)
-                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Product>()
+                .HasIndex(p => p.Number)
+                .IsUnique();
+
+            modelBuilder.Entity<Substance>()
+                .HasIndex(s => s.CASNumber)
+                .IsUnique();
+
+            modelBuilder.Entity<RegulationList>()
+                .HasIndex(rl => rl.Description)
+                .IsUnique();
+
+            modelBuilder.Entity<Article>(e =>
+            {
+                e.HasIndex(a => a.Number)
+                 .IsUnique();
+            });
 
             modelBuilder.Entity<ConformityType>(e =>
             {
@@ -121,30 +148,21 @@ namespace ConformityCheck.Data
                 .IsUnique();
             });
 
-            modelBuilder.Entity<Article>()
-                .HasIndex(a => a.Number)
-                .IsUnique();
+            modelBuilder.Entity<Conformity>()
+                .HasOne(c => c.ConformityType)
+                .WithMany(ct => ct.Conformities)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Product>()
-                .HasIndex(p => p.Number)
-                .IsUnique();
-
-            modelBuilder.Entity<Substance>()
-                .HasIndex(s => s.CASNumber)
-                .IsUnique();
-
-            modelBuilder.Entity<Supplier>() //da setna da se nulira zapisa na SupplierID v Article pri delete 
-                //na Supplier - TODO!
-            .HasMany(s => s.Articles)
-            .WithOne(a => a.Supplier)
-            .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Article>()
-            .HasOne(a => a.Supplier)
-            .WithMany(s => s.Articles)
-            .OnDelete(DeleteBehavior.Restrict);
+            //da setna da se nulira zapisa na SupplierID v Article pri del 
+            //na Supplier - TODO! 
 
             //modelBuilder.Entity<RegulationList>(); //da mu slagam li neshto ne znam oshte! TODO
+
+            //mislq, che towa ne mi trqbwa weche, zashtoto gi vyrzah many-to-many
+            //modelBuilder.Entity<Supplier>()
+            //    .HasMany(s => s.Articles)
+            //    .WithOne(a => a.Supplier)
+            //    .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
