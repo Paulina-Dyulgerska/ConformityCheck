@@ -20,9 +20,16 @@ namespace ConformityCheck.Models
         public int ConformityTypeId { get; set; }
         public virtual ConformityType ConformityType { get; set; }
 
-        public bool IsConfirmed { get; set; }
+        [Required]
+        [ForeignKey(nameof(Supplier))]
+        public int SupplierId { get; set; }
+        public Supplier Supplier { get; set; }
 
-        public DateTime? ConformationDate { get; set; }
+        public DateTime IssueDate { get; set; }
+
+        public DateTime? ConformationAcceptanceDate { get; set; }
+
+        public bool IsConfirmed { get; set; }
 
         public virtual ICollection<ArticleConformity> Articles { get; set; }
 
