@@ -104,7 +104,7 @@ namespace ConformityCheck.Data.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("ArticleSupplier");
+                    b.ToTable("ArticleSuppliers");
                 });
 
             modelBuilder.Entity("ConformityCheck.Models.Conformity", b =>
@@ -322,13 +322,13 @@ namespace ConformityCheck.Data.Migrations
             modelBuilder.Entity("ConformityCheck.Models.ArticleConformity", b =>
                 {
                     b.HasOne("ConformityCheck.Models.Article", "Article")
-                        .WithMany("Conformities")
+                        .WithMany("ArticleConformities")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ConformityCheck.Models.Conformity", "Conformity")
-                        .WithMany("Articles")
+                        .WithMany("ArticleConformities")
                         .HasForeignKey("ConformityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -337,13 +337,13 @@ namespace ConformityCheck.Data.Migrations
             modelBuilder.Entity("ConformityCheck.Models.ArticleProduct", b =>
                 {
                     b.HasOne("ConformityCheck.Models.Article", "Article")
-                        .WithMany("Products")
+                        .WithMany("ArticleProducts")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ConformityCheck.Models.Product", "Product")
-                        .WithMany("Articles")
+                        .WithMany("ArticleProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -352,13 +352,13 @@ namespace ConformityCheck.Data.Migrations
             modelBuilder.Entity("ConformityCheck.Models.ArticleSubstance", b =>
                 {
                     b.HasOne("ConformityCheck.Models.Article", "Article")
-                        .WithMany("Substances")
+                        .WithMany("ArticleSubstances")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ConformityCheck.Models.Substance", "Substance")
-                        .WithMany("Articles")
+                        .WithMany("ArticleSubstances")
                         .HasForeignKey("SubstanceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -367,13 +367,13 @@ namespace ConformityCheck.Data.Migrations
             modelBuilder.Entity("ConformityCheck.Models.ArticleSupplier", b =>
                 {
                     b.HasOne("ConformityCheck.Models.Article", "Article")
-                        .WithMany("Suppliers")
+                        .WithMany("ArticleSuppliers")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ConformityCheck.Models.Supplier", "Supplier")
-                        .WithMany("Articles")
+                        .WithMany("ArticleSuppliers")
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -397,13 +397,13 @@ namespace ConformityCheck.Data.Migrations
             modelBuilder.Entity("ConformityCheck.Models.ProductConformity", b =>
                 {
                     b.HasOne("ConformityCheck.Models.Conformity", "Conformity")
-                        .WithMany("Products")
+                        .WithMany("ProductConformities")
                         .HasForeignKey("ConformityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ConformityCheck.Models.Product", "Product")
-                        .WithMany("Conformities")
+                        .WithMany("ProductConformities")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -412,13 +412,13 @@ namespace ConformityCheck.Data.Migrations
             modelBuilder.Entity("ConformityCheck.Models.SubstanceRegulationList", b =>
                 {
                     b.HasOne("ConformityCheck.Models.RegulationList", "RegulationList")
-                        .WithMany("Substances")
+                        .WithMany("SubstanceRegulationLists")
                         .HasForeignKey("RegulationListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ConformityCheck.Models.Substance", "Substance")
-                        .WithMany("RegulationLists")
+                        .WithMany("SubstanceRegulationLists")
                         .HasForeignKey("SubstanceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

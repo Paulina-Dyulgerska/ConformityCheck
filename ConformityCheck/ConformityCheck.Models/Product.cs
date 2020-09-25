@@ -7,8 +7,8 @@ namespace ConformityCheck.Models
     {
         public Product()
         {
-            this.Articles = new HashSet<ArticleProduct>();
-            this.Conformities = new HashSet<ProductConformity>();
+            this.ArticleProducts = new HashSet<ArticleProduct>();
+            this.ProductConformities = new HashSet<ProductConformity>();
         }
 
         [Key]
@@ -24,8 +24,8 @@ namespace ConformityCheck.Models
 
         public bool IsDeleted { get; set; }
 
-        public virtual ICollection<ArticleProduct> Articles { get; set; }
+        public virtual ICollection<ArticleProduct> ArticleProducts { get; set; }
 
-        public virtual ICollection<ProductConformity> Conformities { get; set; }
+        public virtual ICollection<ProductConformity> ProductConformities { get; set; }
     }
 }

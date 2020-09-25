@@ -7,7 +7,7 @@ namespace ConformityCheck.Models
     {
         public Supplier()
         {
-            this.Articles = new HashSet<ArticleSupplier>();
+            this.ArticleSuppliers = new HashSet<ArticleSupplier>();
         }
 
         [Key]
@@ -35,6 +35,6 @@ namespace ConformityCheck.Models
 
         public bool IsDeleted { get; set; }
 
-        public virtual ICollection<ArticleSupplier> Articles { get; set; }
+        public virtual ICollection<ArticleSupplier> ArticleSuppliers { get; set; }
     }
 }

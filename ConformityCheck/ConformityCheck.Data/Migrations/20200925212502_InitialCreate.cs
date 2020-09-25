@@ -173,7 +173,7 @@ namespace ConformityCheck.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ArticleSupplier",
+                name: "ArticleSuppliers",
                 columns: table => new
                 {
                     ArticleId = table.Column<int>(nullable: false),
@@ -181,15 +181,15 @@ namespace ConformityCheck.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ArticleSupplier", x => new { x.ArticleId, x.SupplierId });
+                    table.PrimaryKey("PK_ArticleSuppliers", x => new { x.ArticleId, x.SupplierId });
                     table.ForeignKey(
-                        name: "FK_ArticleSupplier_Articles_ArticleId",
+                        name: "FK_ArticleSuppliers_Articles_ArticleId",
                         column: x => x.ArticleId,
                         principalTable: "Articles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ArticleSupplier_Suppliers_SupplierId",
+                        name: "FK_ArticleSuppliers_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
                         principalColumn: "Id",
@@ -296,8 +296,8 @@ namespace ConformityCheck.Data.Migrations
                 column: "SubstanceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ArticleSupplier_SupplierId",
-                table: "ArticleSupplier",
+                name: "IX_ArticleSuppliers_SupplierId",
+                table: "ArticleSuppliers",
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
@@ -357,7 +357,7 @@ namespace ConformityCheck.Data.Migrations
                 name: "ArticleSubstance");
 
             migrationBuilder.DropTable(
-                name: "ArticleSupplier");
+                name: "ArticleSuppliers");
 
             migrationBuilder.DropTable(
                 name: "ProductConformity");

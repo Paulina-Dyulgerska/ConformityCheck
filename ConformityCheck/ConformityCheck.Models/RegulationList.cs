@@ -7,7 +7,7 @@ namespace ConformityCheck.Models
     {
         public RegulationList()
         {
-            this.Substances = new HashSet<SubstanceRegulationList>();
+            this.SubstanceRegulationLists = new HashSet<SubstanceRegulationList>();
         }
 
         [Key]
@@ -23,6 +23,6 @@ namespace ConformityCheck.Models
         [Required]
         public string SourceURL { get; set; }
 
-        public virtual ICollection<SubstanceRegulationList> Substances { get; set; }
+        public virtual ICollection<SubstanceRegulationList> SubstanceRegulationLists { get; set; }
     }
 }

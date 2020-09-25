@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ConformityCheck.Models
 {
@@ -8,10 +7,10 @@ namespace ConformityCheck.Models
     {
         public Article()
         {
-            this.Products = new HashSet<ArticleProduct>();
-            this.Conformities = new HashSet<ArticleConformity>();
-            this.Substances = new HashSet<ArticleSubstance>();
-            this.Suppliers = new HashSet<ArticleSupplier>();
+            this.ArticleProducts = new HashSet<ArticleProduct>();
+            this.ArticleConformities = new HashSet<ArticleConformity>();
+            this.ArticleSubstances = new HashSet<ArticleSubstance>();
+            this.ArticleSuppliers = new HashSet<ArticleSupplier>();
         }
 
         [Key]
@@ -31,12 +30,12 @@ namespace ConformityCheck.Models
         
         public bool IsDeleted { get; set; }
 
-        public virtual ICollection<ArticleProduct> Products { get; set; }
+        public virtual ICollection<ArticleProduct> ArticleProducts { get; set; }
 
-        public virtual ICollection<ArticleConformity> Conformities { get; set; }
+        public virtual ICollection<ArticleConformity> ArticleConformities { get; set; }
 
-        public virtual ICollection<ArticleSubstance> Substances { get; set; }
+        public virtual ICollection<ArticleSubstance> ArticleSubstances { get; set; }
 
-        public virtual ICollection<ArticleSupplier> Suppliers { get; set; }
+        public virtual ICollection<ArticleSupplier> ArticleSuppliers { get; set; }
     }
 }

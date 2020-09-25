@@ -19,9 +19,11 @@ namespace ConformityCheck.Services
 
         public void Create(ArticleImportDTO articleImportDTO)
         {
-            if (this.db.Articles.FirstOrDefault(x => x.Number == articleImportDTO.Number) != null) //TODO - async-await
+            var articleInDB = this.db.Articles.FirstOrDefault(x => x.Number == articleImportDTO.Number);
+
+            if (articleInDB != null) //TODO - async-await
             {
-                throw new ArgumentException($"There is already an article with this number");
+                throw new ArgumentException($"There is already an article with this number.");
             }
 
             var article = new Article
@@ -40,12 +42,11 @@ namespace ConformityCheck.Services
                 {
                     Number = articleImportDTO.SupplierNumber.Trim(),
                     Name = PascalCaseConverter(articleImportDTO.SupplierName.Trim()),
-                    //Email = articleImportDTO.SupplierEmail == null ? null : articleImportDTO.SupplierEmail.Trim(),
                     Email = articleImportDTO.SupplierEmail?.Trim(),
                     PhoneNumber = articleImportDTO.SupplierPhoneNumber?.Trim(),
-                    ContactPersonFirstName =
-                            PascalCaseConverter(articleImportDTO.ContactPersonFirstName?.Trim()),
-                    ContactPersonLastName = 
+                    ContactPersonFirstName = articleImportDTO.ContactPersonFirstName == null ? null :
+                            PascalCaseConverter(articleImportDTO.ContactPersonFirstName.Trim()),
+                    ContactPersonLastName = articleImportDTO.ContactPersonLastName == null ? null :
                             PascalCaseConverter(articleImportDTO.ContactPersonLastName?.Trim()),
                 };
 
@@ -57,7 +58,12 @@ namespace ConformityCheck.Services
         {
             var supplier = this.GetOrCreateSupplier(supplierImportDTO);
 
-            article.Suppliers.Add(new ArticleSupplier { Supplier = supplier });
+            if (article.ArticleSuppliers.Any(x=>x.SupplierId == supplier.Id))
+            {
+                throw new ArgumentException("The supplier is already asigned to this article");
+            }
+
+            article.ArticleSuppliers.Add(new ArticleSupplier { Supplier = supplier });
 
             this.db.SaveChanges(); //async-await
         }
@@ -97,17 +103,23 @@ namespace ConformityCheck.Services
                 return false;
             };
 
-            article.IsDeleted = true;
-            article.Suppliers.Clear();
-            article.Substances.Clear();
-            article.Products.Clear();
-            article.Conformities.Clear();
+            this.db.Articles.Remove(article);
+
+            //TODO - da razbera kak da naprawq triene, no da mi istanat zapisite. Sigurno trqbwa da
+            //vkaram kolona IsDeleted vyv vsqka tablica ot dolnite 4...
+            //article.IsDeleted = true;
+            //foreach (var item in article.Suppliers)
+            //{
+            //}
+            //article.Suppliers.Clear();
+            //article.Substances.Clear();
+            //article.Products.Clear();
+            //article.Conformities.Clear();
 
             this.db.SaveChanges(); //async-await
 
             return article.IsDeleted;
         }
-
 
         public void AddConformity(int articleId)
         {

@@ -7,8 +7,8 @@ namespace ConformityCheck.Models
     {
         public Substance()
         {
-            this.Articles = new HashSet<ArticleSubstance>();
-            this.RegulationLists = new HashSet<SubstanceRegulationList>();
+            this.ArticleSubstances = new HashSet<ArticleSubstance>();
+            this.SubstanceRegulationLists = new HashSet<SubstanceRegulationList>();
         }
 
         [Key]
@@ -24,8 +24,8 @@ namespace ConformityCheck.Models
 
         public bool IsDeleted { get; set; }
 
-        public virtual ICollection<SubstanceRegulationList> RegulationLists { get; set; }
+        public virtual ICollection<SubstanceRegulationList> SubstanceRegulationLists { get; set; }
 
-        public virtual ICollection<ArticleSubstance> Articles { get; set; }
+        public virtual ICollection<ArticleSubstance> ArticleSubstances { get; set; }
     }
 }

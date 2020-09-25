@@ -30,6 +30,8 @@ namespace ConformityCheck.Data
 
         public DbSet<SubstanceRegulationList> SubstanceRegulationLists { get; set; }
 
+        public DbSet<ArticleSupplier> ArticleSuppliers { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -45,11 +47,11 @@ namespace ConformityCheck.Data
                 e.HasKey(x => new { x.ArticleId, x.ProductId });
 
                 e.HasOne(ap => ap.Article)
-                .WithMany(p => p.Products)
+                .WithMany(p => p.ArticleProducts)
                 .HasForeignKey(ap => ap.ArticleId);
 
                 e.HasOne(ap => ap.Product)
-                .WithMany(a => a.Articles)
+                .WithMany(a => a.ArticleProducts)
                 .HasForeignKey(ap => ap.ProductId);
             });
 
@@ -58,11 +60,11 @@ namespace ConformityCheck.Data
                 e.HasKey(x => new { x.ArticleId, x.ConformityId });
 
                 e.HasOne(ac => ac.Article)
-                .WithMany(a => a.Conformities)
+                .WithMany(a => a.ArticleConformities)
                 .HasForeignKey(c => c.ArticleId);
 
                 e.HasOne(ac => ac.Conformity)
-                .WithMany(c => c.Articles)
+                .WithMany(c => c.ArticleConformities)
                 .HasForeignKey(a => a.ConformityId);
             });
 
@@ -71,11 +73,11 @@ namespace ConformityCheck.Data
                 e.HasKey(x => new { x.ProductId, x.ConformityId });
 
                 e.HasOne(pc => pc.Product)
-                .WithMany(p => p.Conformities)
+                .WithMany(p => p.ProductConformities)
                 .HasForeignKey(c => c.ProductId);
 
                 e.HasOne(pc => pc.Conformity)
-                .WithMany(c => c.Products)
+                .WithMany(c => c.ProductConformities)
                 .HasForeignKey(p => p.ConformityId);
             });
 
@@ -84,11 +86,11 @@ namespace ConformityCheck.Data
                 e.HasKey(x => new { x.ArticleId, x.SubstanceId });
 
                 e.HasOne(asub => asub.Article)
-                .WithMany(a => a.Substances)
+                .WithMany(a => a.ArticleSubstances)
                 .HasForeignKey(s => s.ArticleId);
 
                 e.HasOne(asub => asub.Substance)
-                .WithMany(s => s.Articles)
+                .WithMany(s => s.ArticleSubstances)
                 .HasForeignKey(a => a.SubstanceId);
             });
 
@@ -98,11 +100,11 @@ namespace ConformityCheck.Data
                 e.HasKey(x => new { x.ArticleId, x.SupplierId });
 
                 e.HasOne(asup => asup.Article)
-                .WithMany(a => a.Suppliers)
+                .WithMany(a => a.ArticleSuppliers)
                 .HasForeignKey(s => s.ArticleId);
 
                 e.HasOne(asup => asup.Supplier)
-                .WithMany(s => s.Articles)
+                .WithMany(s => s.ArticleSuppliers)
                 .HasForeignKey(a => a.SupplierId);
             });
             
@@ -111,11 +113,11 @@ namespace ConformityCheck.Data
                 e.HasKey(x => new { x.RegulationListId, x.SubstanceId });
 
                 e.HasOne(srl => srl.RegulationList)
-                .WithMany(rl => rl.Substances)
+                .WithMany(rl => rl.SubstanceRegulationLists)
                 .HasForeignKey(s => s.RegulationListId);
 
                 e.HasOne(srl => srl.Substance)
-                .WithMany(s => s.RegulationLists)
+                .WithMany(s => s.SubstanceRegulationLists)
                 .HasForeignKey(rl => rl.SubstanceId);
             });
 
