@@ -1,5 +1,6 @@
 ﻿using ConformityCheck.Data;
 using ConformityCheck.Services;
+using ConformityCheck.Services.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -16,9 +17,29 @@ namespace ConformityCheck.ConsoleApplication
 
             IArticleService articleService = new ArticleService(db);
 
-            //articleService.Create("7421273-09", "Strip for absteller", "0085657", "Intechna",
-            //    "a@abv.bg", "02343423", "Atanas", "Moskov");
-            //articleService.Create("7421444-09", "Strip for absteller", "0085657", null, null, null, null, null);
+            //articleService.Create(new ArticleImportDTO
+            //{
+            //    Number = "7421273-09",
+            //    Description = "Strip for absteller",
+            //    SupplierNumber = "0085657",
+            //    SupplierName = "Intechna",
+            //    SupplierEmail = "a@abv.bg",
+            //    SupplierPhoneNumber = "02343423",
+            //    ContactPersonFirstName = "Atanas",
+            //    ContactPersonLastName = "Moskov"
+            //});
+
+            articleService.Create(new ArticleImportDTO
+            {
+                Number = "34234234234234-09",
+                Description = "Strip for absteller",
+                SupplierNumber = "0083657",
+                SupplierName = "Reco",
+                //SupplierEmail = "a@abv.bg",
+                //SupplierPhoneNumber = "02343423",
+                //ContactPersonFirstName = "Atanas",
+                //ContactPersonLastName = "Moskov"
+            });
         }
     }
 }

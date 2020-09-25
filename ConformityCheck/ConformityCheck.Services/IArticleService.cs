@@ -8,9 +8,11 @@ namespace ConformityCheck.Services
     {
         public void Create(ArticleImportDTO articleImportDTO);
 
-        public void AddSupplierToArticle(int articleId, ArticleImportDTO articleImportDTO);
+        public void AddSupplierToArticle(Article article, SupplierImportDTO supplierImportDTO);
 
-        public Supplier GetOrCreateSupplier(ArticleImportDTO articleImportDTO);
+        public Supplier GetOrCreateSupplier(SupplierImportDTO supplierImportDTO);
+
+        bool DeleteArticle(int articleId);
 
         IEnumerable<SupplierExportDTO> ListArticleSuppliers(int articleId);
 
@@ -19,8 +21,6 @@ namespace ConformityCheck.Services
         void UpdateSupplierList(int articleId);
 
         void UpdateArticle(int articleId);
-
-        void DeleteArticle(int articleId);
 
         void AddConformity(int articleId);
 
