@@ -1,10 +1,8 @@
 ﻿using ConformityCheck.Data;
 using ConformityCheck.Models;
 using ConformityCheck.Services.ViewModels;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 namespace ConformityCheck.Services
@@ -18,90 +16,55 @@ namespace ConformityCheck.Services
             this.db = db;
         }
 
-        public void AddConformity(int articleId)
+        public void Create(ArticleImportDTO articleImportDTO)
         {
-            throw new NotImplementedException();
-        }
-
-        public void AddSupplierToArticle(Article article, string supplierNumber, string supplierName,
-                                        string supplierEmail, string supplierPhoneNumber,
-                                        string contactPersonFirstName,
-                                        string contactPersonLastName)
-        {
-            if (supplierNumber != null && supplierName != null && supplierEmail != null)
+            if (this.db.Articles.FirstOrDefault(x => x.Number == articleImportDTO.Number) != null) //TODO - async-await
             {
-                var supplier = this.GetOrCreateSupplier(supplierNumber, supplierName,
-                                                     supplierEmail, supplierPhoneNumber, contactPersonFirstName,
-                                                     contactPersonLastName);
-
-                article.Suppliers.Add(new ArticleSupplier { Supplier = supplier });
-            }
-
-            this.db.SaveChanges(); //async-await
-        }
-
-        public void Create(string number, string description, string supplierNumber, string supplierName,
-            string supplierEmail, string supplierPhoneNumber, string contactPersonFirstName,
-            string contactPersonLastName)
-        {
-            //TODO - check the number and description in the importModelsDTOs wirh RegullarExpretion!!!
-
-            //check the article number and description
-            if (string.IsNullOrEmpty(number) || string.IsNullOrWhiteSpace(number))
-            {
-                throw new ArgumentNullException($"{nameof(number)} cannot be null or empty");
-            }
-
-            if (string.IsNullOrEmpty(description) || string.IsNullOrWhiteSpace(description))
-            {
-                throw new ArgumentNullException($"{nameof(description)} cannot be null or empty");
-            }
-
-            if (this.db.Articles.FirstOrDefault(x => x.Number == number) != null) //TODO - async-await
-            {
-                throw new ArgumentException($"{nameof(number)} there is already an artilce with this number.");
+                throw new ArgumentException($"There is already an article with this number");
             }
 
             var article = new Article
             {
-                Number = number.Trim().ToUpper(),
-                Description = description.Trim().ToUpper(),
+                Number = articleImportDTO.Number.Trim().ToUpper(),
+                Description = articleImportDTO.Description.Trim().ToUpper(),
             };
-
-            this.AddSupplierToArticle(article, supplierNumber, supplierName, supplierEmail, supplierPhoneNumber,
-                                         contactPersonFirstName, contactPersonLastName);
 
             db.Articles.Add(article);
 
             this.db.SaveChanges(); //async-await
+
+            if (articleImportDTO.SupplierName != null && articleImportDTO.SupplierNumber != null)
+            {
+                this.AddSupplierToArticle(article.Id, articleImportDTO);
+            }
+
         }
 
-        public void DeleteArticle(int articleId)
+        public void AddSupplierToArticle(int articleId, ArticleImportDTO articleImportDTO)
         {
-            throw new NotImplementedException();
+            var supplier = this.GetOrCreateSupplier(articleImportDTO);
+
+            this.GetArticle(articleId).Suppliers.Add(new ArticleSupplier { Supplier = supplier });
+
+            this.db.SaveChanges(); //async-await
         }
 
-        public Supplier GetOrCreateSupplier(string supplierNumber, string supplierName,
-                                        string supplierEmail, string supplierPhoneNumber,
-                                        string contactPersonFirstName,
-                                        string contactPersonLastName)
+        public Supplier GetOrCreateSupplier(ArticleImportDTO articleImportDTO)
         {
-            //TODO - to validate supplierNumber supplierName supplierEmail in input DTO supplier model
-            //using RegularExpretion!
-
-            var supplier = this.db.Suppliers.FirstOrDefault(x => x.Number == supplierNumber.Trim());
+            var supplier = this.db.Suppliers
+                .FirstOrDefault(x => x.Number == articleImportDTO.SupplierNumber.Trim());
 
             //new supplier is created if not exist in the DB:
             if (supplier == null)
             {
                 supplier = new Supplier
                 {
-                    Number = supplierNumber,
-                    Name = supplierName,
-                    Email = supplierEmail,
-                    PhoneNumber = supplierPhoneNumber,
-                    ContactPersonFirstName = contactPersonFirstName,
-                    ContactPersonLastName = contactPersonLastName,
+                    Number = articleImportDTO.SupplierNumber,
+                    Name = articleImportDTO.SupplierName,
+                    Email = articleImportDTO.SupplierEmail,
+                    PhoneNumber = articleImportDTO.SupplierPhoneNumber,
+                    ContactPersonFirstName = articleImportDTO.ContactPersonFirstName,
+                    ContactPersonLastName = articleImportDTO.ContactPersonLastName,
                 };
             }
 
@@ -110,32 +73,54 @@ namespace ConformityCheck.Services
             return supplier;
         }
 
-        public IEnumerable<ConformityViewModel> ListArticleConformities(int articleId)
+        public void DeleteArticle(int articleId)
+        {
+            var article = this.GetArticle(articleId);
+            if (article != null)
+            {
+                article.IsDeleted = true;
+            };
+
+            article.Suppliers.Clear();
+            article.Substances.Clear();
+            article.Products.Clear();
+            article.Conformities.Clear();
+
+            this.db.SaveChanges(); //async-await
+        }
+
+
+        public void AddConformity(int articleId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<SupplierViewModel> ListArticleSuppliers(int articleId)
+        public IEnumerable<ConformityDTO> ListArticleConformities(int articleId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ArticleViewModel> SearchArticle(int artileId)
+        public IEnumerable<SupplierExportDTO> ListArticleSuppliers(int articleId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ArticleViewModel> SearchByConformity(string conformityType)
+        public IEnumerable<ArticleExportDTO> SearchArticle(int artileId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ArticleViewModel> SearchByStatus(string status)
+        public IEnumerable<ArticleExportDTO> SearchByConformity(string conformityType)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ArticleViewModel> SearchBySupplier(string supplierNumber)
+        public IEnumerable<ArticleExportDTO> SearchByStatus(string status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<ArticleExportDTO> SearchBySupplier(string supplierNumber)
         {
             throw new NotImplementedException();
         }
@@ -149,5 +134,12 @@ namespace ConformityCheck.Services
         {
             throw new NotImplementedException();
         }
+
+
+        private Article GetArticle(int articleId)
+        {
+            return this.db.Articles.FirstOrDefault(x => x.Id == articleId);
+        }
+
     }
 }

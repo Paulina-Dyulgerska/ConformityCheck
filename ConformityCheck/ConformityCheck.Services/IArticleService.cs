@@ -6,21 +6,15 @@ namespace ConformityCheck.Services
 {
     public interface IArticleService
     {
-        public void Create(string number, string description, string supplierNumber, string supplierName,
-            string supplierEmail, string supplierPhoneNumber, string contactPersonFirstName,
-            string contactPersonLastName);
+        public void Create(ArticleImportDTO articleImportDTO);
 
-        public void AddSupplierToArticle(Article article, string supplierNumber, string supplierName,
-                                        string supplierEmail, string supplierPhoneNumber,
-                                        string contactPersonFirstName,
-                                        string contactPersonLastName);
+        public void AddSupplierToArticle(int articleId, ArticleImportDTO articleImportDTO);
 
-        public Supplier GetOrCreateSupplier(string supplierNumber, string supplierName, string supplierEmail,
-            string supplierPhoneNumber, string contactPersonFirstName, string contactPersonLastName);
+        public Supplier GetOrCreateSupplier(ArticleImportDTO articleImportDTO);
 
-        IEnumerable<SupplierViewModel> ListArticleSuppliers(int articleId);
+        IEnumerable<SupplierExportDTO> ListArticleSuppliers(int articleId);
 
-        IEnumerable<ConformityViewModel> ListArticleConformities(int articleId);
+        IEnumerable<ConformityDTO> ListArticleConformities(int articleId);
 
         void UpdateSupplierList(int articleId);
 
@@ -30,13 +24,13 @@ namespace ConformityCheck.Services
 
         void AddConformity(int articleId);
 
-        IEnumerable<ArticleViewModel> SearchArticle(int artileId);
+        IEnumerable<ArticleExportDTO> SearchArticle(int artileId);
 
-        IEnumerable<ArticleViewModel> SearchBySupplier(string supplierNumber);
+        IEnumerable<ArticleExportDTO> SearchBySupplier(string supplierNumber);
 
-        IEnumerable<ArticleViewModel> SearchByConformity(string conformityType);
+        IEnumerable<ArticleExportDTO> SearchByConformity(string conformityType);
 
-        IEnumerable<ArticleViewModel> SearchByStatus(string status); //confirmed or not
+        IEnumerable<ArticleExportDTO> SearchByStatus(string status); //confirmed or not
 
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ConformityCheck.Services.ViewModels
 {
-    public class ArticleViewModel
+    public class ArticleExportDTO
     {
         public string Number { get; set; }
 

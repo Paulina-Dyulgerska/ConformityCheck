@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConformityCheck.Data.Migrations
 {
     [DbContext(typeof(ConformityCheckContext))]
-    [Migration("20200925145522_InitialCreate")]
+    [Migration("20200925161339_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -296,7 +296,6 @@ namespace ConformityCheck.Data.Migrations
                         .HasMaxLength(20);
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 

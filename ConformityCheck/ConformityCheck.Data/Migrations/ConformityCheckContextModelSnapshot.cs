@@ -294,7 +294,6 @@ namespace ConformityCheck.Data.Migrations
                         .HasMaxLength(20);
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 

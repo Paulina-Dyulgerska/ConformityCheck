@@ -88,7 +88,7 @@ namespace ConformityCheck.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Number = table.Column<string>(maxLength: 20, nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
-                    Email = table.Column<string>(maxLength: 50, nullable: false),
+                    Email = table.Column<string>(maxLength: 50, nullable: true),
                     PhoneNumber = table.Column<string>(maxLength: 20, nullable: true),
                     ContactPersonFirstName = table.Column<string>(maxLength: 20, nullable: true),
                     ContactPersonLastName = table.Column<string>(maxLength: 20, nullable: true),

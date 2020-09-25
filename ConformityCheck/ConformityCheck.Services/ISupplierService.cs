@@ -13,9 +13,9 @@ namespace ConformityCheck.Services
 
         void DeleteArticle(int supplierId, int articleId);
 
-        IEnumerable<ArticleViewModel> ListArticles(int articleId);
+        IEnumerable<ArticleExportDTO> ListArticles(int articleId);
 
-        IEnumerable<ConformityViewModel> ListConformities(int articleId);
+        IEnumerable<ConformityDTO> ListConformities(int articleId);
 
         void UpdateSupplierInformation(int supplierId);
 
@@ -23,11 +23,11 @@ namespace ConformityCheck.Services
 
         void AddConformity(int supplierId);
 
-        IEnumerable<SupplierViewModel> SearchSupplier(int supplierId);
+        IEnumerable<SupplierExportDTO> SearchSupplier(int supplierId);
 
-        IEnumerable<SupplierViewModel> SearchByArticle(string articleNumber);
+        IEnumerable<SupplierExportDTO> SearchByArticle(string articleNumber);
 
-        IEnumerable<SupplierViewModel> SearchByConformity(string conformityType);
+        IEnumerable<SupplierExportDTO> SearchByConformity(string conformityType);
 
     }
 }

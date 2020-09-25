@@ -2,7 +2,7 @@
 
 namespace ConformityCheck.Services.ViewModels
 {
-    public class ConformityViewModel
+    public class ConformityDTO
     {
         public string ConformityType { get; set; }
 
