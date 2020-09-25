@@ -34,7 +34,7 @@ namespace ConformityCheck.Services
 
             db.Articles.Add(article);
 
-            this.db.SaveChanges(); //async-await
+            this.db.SaveChanges(); //TODO - async-await
 
             if (articleImportDTO.SupplierName != null && articleImportDTO.SupplierNumber != null)
             {
@@ -65,7 +65,7 @@ namespace ConformityCheck.Services
 
             article.ArticleSuppliers.Add(new ArticleSupplier { Supplier = supplier });
 
-            this.db.SaveChanges(); //async-await
+            this.db.SaveChanges(); //TODO async-await
         }
 
         public Supplier GetOrCreateSupplier(SupplierImportDTO supplierImportDTO)
@@ -126,6 +126,16 @@ namespace ConformityCheck.Services
             throw new NotImplementedException();
         }
 
+        public void UpdateArticle(int articleId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteSupplierFromArticle(int articleId)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<ConformityDTO> ListArticleConformities(int articleId)
         {
             throw new NotImplementedException();
@@ -156,19 +166,15 @@ namespace ConformityCheck.Services
             throw new NotImplementedException();
         }
 
-        public void UpdateArticle(int articleId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateSupplierList(int articleId)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Article GetArticle(int articleId)
+        public Article GetArticle(int articleId)
         {
             return this.db.Articles.FirstOrDefault(x => x.Id == articleId);
+        }
+
+
+        public void ShowSupplierList(int articleId)
+        {
+            throw new NotImplementedException();
         }
 
         private string PascalCaseConverter(string stringToFix)
@@ -187,5 +193,6 @@ namespace ConformityCheck.Services
 
             return st.ToString();
         }
+
     }
 }

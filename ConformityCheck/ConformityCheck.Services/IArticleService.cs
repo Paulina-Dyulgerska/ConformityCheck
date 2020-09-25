@@ -6,31 +6,35 @@ namespace ConformityCheck.Services
 {
     public interface IArticleService
     {
+        public Article GetArticle(int articleId);
+
         public void Create(ArticleImportDTO articleImportDTO);
 
         public void AddSupplierToArticle(Article article, SupplierImportDTO supplierImportDTO);
 
         public Supplier GetOrCreateSupplier(SupplierImportDTO supplierImportDTO);
 
-        bool DeleteArticle(int articleId);
+        public bool DeleteArticle(int articleId);
 
-        IEnumerable<SupplierExportDTO> ListArticleSuppliers(int articleId);
+        public void DeleteSupplierFromArticle(int articleId);
 
-        IEnumerable<ConformityDTO> ListArticleConformities(int articleId);
+        public void ShowSupplierList(int articleId);
 
-        void UpdateSupplierList(int articleId);
+        public IEnumerable<SupplierExportDTO> ListArticleSuppliers(int articleId);
 
-        void UpdateArticle(int articleId);
+        public IEnumerable<ConformityDTO> ListArticleConformities(int articleId);
 
-        void AddConformity(int articleId);
+        public void UpdateArticle(int articleId);
 
-        IEnumerable<ArticleExportDTO> SearchArticle(int artileId);
+        public void AddConformity(int articleId);
 
-        IEnumerable<ArticleExportDTO> SearchBySupplier(string supplierNumber);
+        public IEnumerable<ArticleExportDTO> SearchArticle(int artileId);
 
-        IEnumerable<ArticleExportDTO> SearchByConformity(string conformityType);
+        public IEnumerable<ArticleExportDTO> SearchBySupplier(string supplierNumber);
 
-        IEnumerable<ArticleExportDTO> SearchByStatus(string status); //confirmed or not
+        public IEnumerable<ArticleExportDTO> SearchByConformity(string conformityType);
+
+        public IEnumerable<ArticleExportDTO> SearchByStatus(string status); //confirmed or not
 
     }
 }
