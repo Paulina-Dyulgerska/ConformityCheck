@@ -34,6 +34,8 @@ namespace ConformityCheck.Models
         [MaxLength(20)]
         public string ContactPersonLastName { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual ICollection<ArticleSupplier> Articles { get; set; }
     }
 }

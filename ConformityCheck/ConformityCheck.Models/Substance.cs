@@ -22,6 +22,8 @@ namespace ConformityCheck.Models
         [MaxLength(100)]
         public string Description { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual ICollection<SubstanceRegulationList> RegulationLists { get; set; }
 
         public virtual ICollection<ArticleSubstance> Articles { get; set; }

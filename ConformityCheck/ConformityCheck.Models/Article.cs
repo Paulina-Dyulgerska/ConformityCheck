@@ -25,9 +25,11 @@ namespace ConformityCheck.Models
         [MaxLength(50)]
         public string Description { get; set; }
 
-        [ForeignKey(nameof(Supplier))]
-        public int? MainSupplierID { get; set; }
-        public virtual Supplier MainSupplier { get; set; }
+        //[ForeignKey(nameof(Supplier))]
+        //public int? MainSupplierID { get; set; }
+        //public virtual Supplier MainSupplier { get; set; }
+        
+        public bool IsDeleted { get; set; }
 
         public virtual ICollection<ArticleProduct> Products { get; set; }
 

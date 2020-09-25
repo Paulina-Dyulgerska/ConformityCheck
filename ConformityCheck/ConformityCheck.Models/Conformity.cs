@@ -31,6 +31,8 @@ namespace ConformityCheck.Models
 
         public bool IsConfirmed { get; set; }
 
+        public bool IsDeleted { get; set; }
+
         public virtual ICollection<ArticleConformity> Articles { get; set; }
 
         public virtual ICollection<ProductConformity> Products { get; set; }
