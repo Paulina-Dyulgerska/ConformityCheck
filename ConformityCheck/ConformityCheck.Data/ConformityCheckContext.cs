@@ -28,6 +28,8 @@ namespace ConformityCheck.Data
 
         public DbSet<Supplier> Suppliers { get; set; }
 
+        public DbSet<SubstanceRegulationList> SubstanceRegulationLists { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

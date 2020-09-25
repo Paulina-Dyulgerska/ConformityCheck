@@ -31,8 +31,8 @@ namespace ConformityCheck.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("MainSupplierID")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Number")
                         .IsRequired()
@@ -40,8 +40,6 @@ namespace ConformityCheck.Data.Migrations
                         .HasMaxLength(20);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MainSupplierID");
 
                     b.HasIndex("Number")
                         .IsUnique();
@@ -125,6 +123,9 @@ namespace ConformityCheck.Data.Migrations
                     b.Property<bool>("IsConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("IssueDate")
                         .HasColumnType("datetime2");
 
@@ -171,6 +172,9 @@ namespace ConformityCheck.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Number")
                         .IsRequired()
@@ -245,6 +249,9 @@ namespace ConformityCheck.Data.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CASNumber")
@@ -268,7 +275,7 @@ namespace ConformityCheck.Data.Migrations
 
                     b.HasIndex("SubstanceId");
 
-                    b.ToTable("SubstanceRegulationList");
+                    b.ToTable("SubstanceRegulationLists");
                 });
 
             modelBuilder.Entity("ConformityCheck.Models.Supplier", b =>
@@ -291,6 +298,9 @@ namespace ConformityCheck.Data.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
@@ -308,13 +318,6 @@ namespace ConformityCheck.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Suppliers");
-                });
-
-            modelBuilder.Entity("ConformityCheck.Models.Article", b =>
-                {
-                    b.HasOne("ConformityCheck.Models.Supplier", "MainSupplier")
-                        .WithMany()
-                        .HasForeignKey("MainSupplierID");
                 });
 
             modelBuilder.Entity("ConformityCheck.Models.ArticleConformity", b =>
