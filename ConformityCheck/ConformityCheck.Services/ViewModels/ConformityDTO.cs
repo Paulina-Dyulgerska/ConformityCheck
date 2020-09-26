@@ -10,7 +10,7 @@ namespace ConformityCheck.Services.ViewModels
 
         public string SupplierName { get; set; }
 
-        public DateTime IssueDate { get; set; }
+        public DateTime IssueDate { get; set; } //vsichki dates da sa v UTC, i tuk i na servera i na DB-a!!!
 
         public DateTime? ConformationAcceptanceDate { get; set; }
 
