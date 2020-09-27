@@ -16,21 +16,18 @@ namespace ConformityCheck.Data
 
         public DbSet<Article> Articles { get; set; }
 
+        public DbSet<Supplier> Suppliers { get; set; }
+
         public DbSet<Product> Products { get; set; }
 
-        public DbSet<ConformityType> ConformityTypes { get; set; }
-
         public DbSet<Conformity> Conformities { get; set; }
+
+        public DbSet<ConformityType> ConformityTypes { get; set; }
 
         public DbSet<Substance> Substances { get; set; }
 
         public DbSet<RegulationList> RegulationLists { get; set; }
 
-        public DbSet<Supplier> Suppliers { get; set; }
-
-        public DbSet<SubstanceRegulationList> SubstanceRegulationLists { get; set; }
-
-        public DbSet<ArticleSupplier> ArticleSuppliers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -107,7 +104,7 @@ namespace ConformityCheck.Data
                 .WithMany(s => s.ArticleSuppliers)
                 .HasForeignKey(a => a.SupplierId);
             });
-            
+
             modelBuilder.Entity<SubstanceRegulationList>(e =>
             {
                 e.HasKey(x => new { x.RegulationListId, x.SubstanceId });
