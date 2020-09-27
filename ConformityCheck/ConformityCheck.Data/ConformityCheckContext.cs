@@ -28,6 +28,7 @@ namespace ConformityCheck.Data
 
         public DbSet<RegulationList> RegulationLists { get; set; }
 
+        public DbSet<ArticleSupplier> ArticleSuppliers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
