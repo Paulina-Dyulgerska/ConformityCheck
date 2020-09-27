@@ -19,9 +19,9 @@ namespace ConformityCheck.Services
 
         public void Create(ArticleImportDTO articleImportDTO)
         {
-            var articleInDB = this.db.Articles.FirstOrDefault(x => x.Number == articleImportDTO.Number);
+            var articleEntity = this.db.Articles.FirstOrDefault(x => x.Number == articleImportDTO.Number.Trim().ToUpper());
 
-            if (articleInDB != null) //TODO - async-await
+            if (articleEntity != null) //TODO - async-await
             {
                 throw new ArgumentException($"There is already an article with this number.");
             }
@@ -29,7 +29,7 @@ namespace ConformityCheck.Services
             var article = new Article
             {
                 Number = articleImportDTO.Number.Trim().ToUpper(),
-                Description = articleImportDTO.Description.Trim().ToUpper(),
+                Description = PascalCaseConverter(articleImportDTO.Description),
             };
 
             db.Articles.Add(article);
@@ -38,72 +38,94 @@ namespace ConformityCheck.Services
 
             if (articleImportDTO.SupplierName != null && articleImportDTO.SupplierNumber != null)
             {
-                var supplierImportDTO = new SupplierImportDTO
-                {
-                    Number = articleImportDTO.SupplierNumber.Trim(),
-                    Name = PascalCaseConverter(articleImportDTO.SupplierName.Trim()),
-                    Email = articleImportDTO.SupplierEmail?.Trim(),
-                    PhoneNumber = articleImportDTO.SupplierPhoneNumber?.Trim(),
-                    ContactPersonFirstName = articleImportDTO.ContactPersonFirstName == null ? null :
-                            PascalCaseConverter(articleImportDTO.ContactPersonFirstName.Trim()),
-                    ContactPersonLastName = articleImportDTO.ContactPersonLastName == null ? null :
-                            PascalCaseConverter(articleImportDTO.ContactPersonLastName?.Trim()),
-                };
-
-                this.AddSupplierToArticle(article, supplierImportDTO);
+                this.AddSupplierToArticle(article, articleImportDTO);
             }
         }
 
-        public void AddSupplierToArticle(Article article, SupplierImportDTO supplierImportDTO)
+        public void AddSupplierToArticle(Article article, ArticleImportDTO articleImportDTO)
         {
-            var supplier = this.GetOrCreateSupplier(supplierImportDTO);
+            var supplierEntity = this.GetOrCreateSupplier(articleImportDTO);
 
-            if (article.ArticleSuppliers.Any(x=>x.SupplierId == supplier.Id))
+            var articleSuppliers = db.Articles.Where(a => a.Id == article.Id).Select(a => a.ArticleSuppliers).FirstOrDefault(); //async-await
+
+            if (articleSuppliers.Any(x => x.SupplierId == supplierEntity.Id))
             {
                 throw new ArgumentException("The supplier is already asigned to this article");
             }
 
-            article.ArticleSuppliers.Add(new ArticleSupplier { Supplier = supplier });
+            article.ArticleSuppliers.Add(new ArticleSupplier { Supplier = supplierEntity });
 
             this.db.SaveChanges(); //TODO async-await
         }
 
-        public Supplier GetOrCreateSupplier(SupplierImportDTO supplierImportDTO)
+        public Supplier GetOrCreateSupplier(ArticleImportDTO articleImportDTO)
         {
-            var supplier = this.db.Suppliers
-                .FirstOrDefault(x => x.Number == supplierImportDTO.Number);
+            var supplierEntity = this.db.Suppliers.FirstOrDefault(x => x.Number == articleImportDTO.SupplierNumber.Trim().ToUpper());
 
             //new supplier is created if not exist in the DB:
-            if (supplier == null)
+            if (supplierEntity == null)
             {
-                supplier = new Supplier
+                supplierEntity = new Supplier
                 {
-                    Number = supplierImportDTO.Number,
-                    Name = supplierImportDTO.Name,
-                    Email = supplierImportDTO.Email,
-                    PhoneNumber = supplierImportDTO.PhoneNumber,
-                    ContactPersonFirstName = supplierImportDTO.ContactPersonFirstName,
-                    ContactPersonLastName = supplierImportDTO.ContactPersonLastName,
+                    Number = articleImportDTO.SupplierNumber.Trim().ToUpper(),
+                    Name = PascalCaseConverter(articleImportDTO.SupplierName),
+                    Email = articleImportDTO.SupplierEmail?.Trim(),
+                    PhoneNumber = articleImportDTO.SupplierPhoneNumber?.Trim(),
+                    ContactPersonFirstName = articleImportDTO.ContactPersonFirstName == null ? null :
+                            PascalCaseConverter(articleImportDTO.ContactPersonFirstName),
+                    ContactPersonLastName = articleImportDTO.ContactPersonLastName == null ? null :
+                            PascalCaseConverter(articleImportDTO.ContactPersonLastName),
                 };
 
-                this.db.Suppliers.Add(supplier);
+                this.db.Suppliers.Add(supplierEntity);
 
                 this.db.SaveChanges(); //async-await
             }
 
-            return supplier;
+            return supplierEntity;
         }
 
-        public bool DeleteArticle(int articleId)
+        public void DeleteSupplierFromArticle(int articleId, int supplierId)
         {
-            var article = this.GetArticle(articleId);
+            var articleEntity = this.GetArticle(articleId);
+            var supplierEntity = this.GetSupplier(supplierId);
 
-            if (article == null)
+            if (articleEntity == null)
             {
-                return false;
+                throw new ArgumentException("No such article");
+            }
+
+            if (supplierEntity == null)
+            {
+                throw new ArgumentException("No such supplier");
+            }
+
+            var articleSuppliers = this.GetSuppliersIdsList(articleId);
+
+            if (!articleSuppliers.Contains(supplierId))
+            {
+                throw new ArgumentException("The article does not have such supplier.");
+            }
+
+            db.ArticleSuppliers.Remove(new ArticleSupplier
+            {
+                ArticleId = articleId,
+                SupplierId = supplierId,
+            });
+
+            db.SaveChanges();
+        }
+
+        public int DeleteArticle(int articleId)
+        {
+            var articleEntity = this.GetArticle(articleId);
+
+            if (articleEntity == null)
+            {
+                throw new ArgumentException("No such article id");
             };
 
-            this.db.Articles.Remove(article);
+            this.db.Articles.Remove(articleEntity);
 
             //TODO - da razbera kak da naprawq triene, no da mi istanat zapisite. Sigurno trqbwa da
             //vkaram kolona IsDeleted vyv vsqka tablica ot dolnite 4...
@@ -116,9 +138,7 @@ namespace ConformityCheck.Services
             //article.Products.Clear();
             //article.Conformities.Clear();
 
-            this.db.SaveChanges(); //async-await
-
-            return article.IsDeleted;
+            return this.db.SaveChanges(); //async-await
         }
 
         public void AddConformity(int articleId)
@@ -126,14 +146,26 @@ namespace ConformityCheck.Services
             throw new NotImplementedException();
         }
 
-        public void UpdateArticle(int articleId)
+        public void UpdateArticle(ArticleImportDTO articleImportDTO)
         {
-            throw new NotImplementedException();
-        }
+            var articleEntity = this.db.Articles.FirstOrDefault(x => x.Number == articleImportDTO.Number.Trim().ToUpper());
 
-        public void DeleteSupplierFromArticle(int articleId)
-        {
-            throw new NotImplementedException();
+            if (articleEntity == null) //TODO - async-await
+            {
+                throw new ArgumentException($"There is no article with this number.");
+            }
+
+            articleEntity.Number = articleImportDTO.Number.Trim().ToUpper();
+
+            articleEntity.Description = PascalCaseConverter(articleImportDTO.Description);
+
+            //TODO - all other article characteristics have to be able to be deleted.
+            //Suppliers
+            //Conformities
+            //Products
+            //Sustances
+
+            this.db.SaveChanges(); //TODO - async-await
         }
 
         public IEnumerable<ConformityDTO> ListArticleConformities(int articleId)
@@ -142,6 +174,10 @@ namespace ConformityCheck.Services
         }
 
         public IEnumerable<SupplierExportDTO> ListArticleSuppliers(int articleId)
+        {
+            throw new NotImplementedException();
+        }
+        public IEnumerable<ProductDTO> ListArticleProducts(int articleId)
         {
             throw new NotImplementedException();
         }
@@ -171,10 +207,24 @@ namespace ConformityCheck.Services
             return this.db.Articles.FirstOrDefault(x => x.Id == articleId);
         }
 
-
-        public void ShowSupplierList(int articleId)
+        public Supplier GetSupplier(int supplierId)
         {
-            throw new NotImplementedException();
+            return this.db.Suppliers.FirstOrDefault(x => x.Id == supplierId);
+        }
+
+        public IEnumerable<string> GetSuppliersNuumbersList(int articleId)
+        {
+            return db.Articles.Where(x => x.Id == articleId).Select(x => x.ArticleSuppliers.Select(s => s.Supplier.Number)).FirstOrDefault();
+        }
+
+        public IEnumerable<int> GetSuppliersIdsList(int articleId)
+        {
+            return db.Articles.Where(x => x.Id == articleId).Select(x => x.ArticleSuppliers.Select(s => s.Supplier.Id)).FirstOrDefault();
+        }
+
+        public int GetSuppliersCount(int articleId)
+        {
+            return db.Articles.Where(x => x.Id == articleId).Select(x => x.ArticleSuppliers).FirstOrDefault().Count;
         }
 
         private string PascalCaseConverter(string stringToFix)
@@ -183,16 +233,15 @@ namespace ConformityCheck.Services
             st.Append(char.ToUpper(stringToFix[0]));
             for (int i = 1; i < stringToFix.Length; i++)
             {
-                if (stringToFix[i] == ' ')
-                {
-                    continue;
-                }
-
                 st.Append(char.ToLower(stringToFix[i]));
             }
 
-            return st.ToString();
+            return st.ToString().Trim();
         }
 
+        //private string FormatInputString(string stringToFormat) //it is 25% slower than the PascalCaseConverter
+        //{
+        //    return $"{stringToFormat.ToUpper()[0]}{stringToFormat.Substring(1).ToLower()}".Trim(); 
+        //}
     }
 }
