@@ -1,8 +1,10 @@
 ﻿using ConformityCheck.Data;
+using ConformityCheck.Models;
 using ConformityCheck.Services;
 using ConformityCheck.Services.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ConformityCheck.ConsoleApplication
@@ -66,18 +68,47 @@ namespace ConformityCheck.ConsoleApplication
             //    ContactPersonLastName = "ReFFF   "
             //});
 
-            //articleService.DeleteArticle(13);
-
-            //articleService.AddSupplierToArticle(db.Articles.FirstOrDefault(x => x.Id == 3), new SupplierImportDTO
+            //var article = db.Articles.FirstOrDefault(x => x.Id == 3);
+            //articleService.AddSupplierToArticle(article, new ArticleImportDTO
             //{
-            //    Number = "0096862",
-            //    Name = "Urban",
+            //    Number = article.Number,
+            //    Description = article.Description,
+            //    SupplierNumber = "0099999",
+            //    SupplierName = "PAN",
             //});
 
-            //var a = articleService.GetArticle(4).ArticleSuppliers;
-            //var la = a.ArticleSuppliers.ToList();
-            //la.Select(x=>x.SupplierId).ToList().ForEach(x=> { Console.WriteLine(x); });
-            //Console.WriteLine(a.ArticleSuppliers.ToList());
+            //articleService.DeleteArticle(4);
+
+            //var  a = articleService.ShowSupplierList(5);
+
+            //articleService.DeleteSupplierFromArticle(1, 1);
+
+            articleService.DeleteSupplierFromArticle(31, 1);
+        }
+    }
+
+    class Helper
+    {
+        static void Help()
+        {
+            var db = new ConformityCheckContext();
+            IArticleService articleService = new ArticleService(db);
+
+            Stopwatch sw = Stopwatch.StartNew();
+            //articleService.FormatInputString("asdasdadFSfASFASFA"); //2810
+            //articleService.PascalCaseConverter("asdasdadFSfASFASFA"); //2230
+            Console.WriteLine(sw.ElapsedTicks);
+
+            var a = db.Articles.Where(x => x.Id == 6).FirstOrDefault();
+            db.Entry(a).Collection(e => e.ArticleSuppliers).Load();
+            var l = a.ArticleSuppliers;
+
+            var bCount = db.Articles.Where(x => x.Id == 6).Select(x => x.ArticleSuppliers).FirstOrDefault();
+            var ld = articleService.GetSuppliersNuumbersList(db.Articles.Where(x => x.Id == 5).FirstOrDefault().Id);
+            var bSupplierNumber = db.Articles
+    .Where(x => x.Id == 5)
+    .Select(x => x.ArticleSuppliers.Select(s => s.Supplier.Number))
+    .FirstOrDefault();
         }
     }
 }
