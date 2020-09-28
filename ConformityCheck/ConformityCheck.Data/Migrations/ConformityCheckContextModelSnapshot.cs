@@ -114,16 +114,22 @@ namespace ConformityCheck.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("ConformationAcceptanceDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ConformityTypeId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsConfirmed")
+                    b.Property<bool>("IsAccepted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsValid")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("IssueDate")

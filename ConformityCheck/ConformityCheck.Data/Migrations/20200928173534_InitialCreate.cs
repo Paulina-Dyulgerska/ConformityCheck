@@ -206,8 +206,10 @@ namespace ConformityCheck.Data.Migrations
                     SupplierId = table.Column<int>(nullable: false),
                     IssueDate = table.Column<DateTime>(nullable: false),
                     ConformationAcceptanceDate = table.Column<DateTime>(nullable: true),
-                    IsConfirmed = table.Column<bool>(nullable: false),
-                    IsDeleted = table.Column<bool>(nullable: false)
+                    IsAccepted = table.Column<bool>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    IsValid = table.Column<bool>(nullable: false),
+                    Comments = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

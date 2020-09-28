@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ConformityCheck.Data.Migrations
 {
     [DbContext(typeof(ConformityCheckContext))]
-    [Migration("20200927185805_InitialCreate")]
+    [Migration("20200928173534_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -116,16 +116,22 @@ namespace ConformityCheck.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Comments")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("ConformationAcceptanceDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ConformityTypeId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsConfirmed")
+                    b.Property<bool>("IsAccepted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsValid")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("IssueDate")
