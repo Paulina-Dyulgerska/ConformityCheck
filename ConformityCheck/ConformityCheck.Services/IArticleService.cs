@@ -20,7 +20,7 @@ namespace ConformityCheck.Services
 
         public void DeleteSupplierFromArticle(int articleId, int supplierId);
 
-        public IEnumerable<string> GetSuppliersNuumbersList(int articleId);
+        public IEnumerable<string> GetSuppliersNumbersList(int articleId);
         public int GetSuppliersCount(int articleId);
 
 
@@ -32,14 +32,15 @@ namespace ConformityCheck.Services
         public void UpdateArticle(ArticleImportDTO articleImportDTO);
 
         public void AddConformity(int articleId);
+        public void DeleteConformity(int articleId);
 
-        public IEnumerable<ArticleExportDTO> SearchArticle(int artileId);
+        public IEnumerable<ArticleExportDTO> SearchByArticleNumber(int artileId);
 
-        public IEnumerable<ArticleExportDTO> SearchBySupplier(string supplierNumber);
+        public IEnumerable<ArticleExportDTO> SearchBySupplierNumber(string supplierNumber);
 
-        public IEnumerable<ArticleExportDTO> SearchByConformity(string conformityType);
+        public IEnumerable<ArticleExportDTO> SearchByConformityType(string conformityType);
 
-        public IEnumerable<ArticleExportDTO> SearchByStatus(string status); //confirmed or not
+        public IEnumerable<ArticleExportDTO> SearchByConfirmedStatus(string status); //confirmed or not
 
 
 
