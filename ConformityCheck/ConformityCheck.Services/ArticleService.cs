@@ -194,13 +194,7 @@ namespace ConformityCheck.Services
         {
             throw new NotImplementedException();
         }
-<<<<<<< HEAD
-=======
-        public void DeleteConformity(int articleId)
-        {
-            throw new NotImplementedException();
-        }
->>>>>>> 992932ed973c22a65cb4ab45f36ebb63e9c4a67b
+
         public void UpdateArticle(ArticleImportDTO articleImportDTO)
         {
             var articleEntity = this.db.Articles.FirstOrDefault(x => x.Number == articleImportDTO.Number.Trim().ToUpper());
