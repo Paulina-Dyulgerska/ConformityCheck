@@ -15,13 +15,15 @@ namespace ConformityCheck.Services
 
         IEnumerable<ArticleExportDTO> ListArticles(int articleId);
 
-        IEnumerable<ConformityDTO> ListConformities(int articleId);
+        IEnumerable<ConformityImportDTO> ListConformities(int articleId);
 
         void UpdateSupplierInformation(int supplierId);
 
         void DeleteSupplier(int supplierId);
 
-        void AddConformity(int supplierId);
+        void AddConformity(int supplierId); //shte slaga na vsichki negovi articuli, tova conformity!!!! Otdelno shte go zakacha za supplier-a!
+        //trqbwa da pravq proverka dali pri kachvaneto na article, veche ne e potvyrdeno towa conformity i ako dostavchika go e potvyrdil,
+        //da go zakacham i pri kachvane na article syshto!!!!
 
         IEnumerable<SupplierExportDTO> SearchSupplier(int supplierId);
 

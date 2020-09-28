@@ -1,19 +1,23 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ConformityCheck.Services.ViewModels
 {
-    public class ConformityDTO
+    public class ConformityImportDTO
     {
+        [Required]
         public string ConformityType { get; set; }
 
-        public string SupplierNumber { get; set; }
+        [Required]
+        public string ArticleNumber { get; set; }
 
-        public string SupplierName { get; set; }
+        [Required]
+        public string SupplierNumber { get; set; }
 
         public DateTime IssueDate { get; set; } //vsichki dates da sa v UTC, i tuk i na servera i na DB-a!!!
 
         public DateTime? ConformationAcceptanceDate { get; set; }
 
-        public bool IsConfirmed { get; set; }
+        public bool IsAssepted { get; set; }
     }
 }
