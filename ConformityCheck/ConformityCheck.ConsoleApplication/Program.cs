@@ -104,7 +104,7 @@ namespace ConformityCheck.ConsoleApplication
             var l = a.ArticleSuppliers;
 
             var bCount = db.Articles.Where(x => x.Id == 6).Select(x => x.ArticleSuppliers).FirstOrDefault();
-            var ld = articleService.GetSuppliersNuumbersList(db.Articles.Where(x => x.Id == 5).FirstOrDefault().Id);
+            var ld = articleService.GetSuppliersNumbersList(db.Articles.Where(x => x.Id == 5).FirstOrDefault().Id);
             var bSupplierNumber = db.Articles
     .Where(x => x.Id == 5)
     .Select(x => x.ArticleSuppliers.Select(s => s.Supplier.Number))
