@@ -148,6 +148,13 @@ namespace ConformityCheck.Data
                 .IsUnique();
             });
 
+            modelBuilder.Entity<Supplier>()
+                .HasMany(s => s.Conformities)
+                .WithOne(a => a.Supplier)
+                .OnDelete(DeleteBehavior.Restrict); //ne moje da se iztrie Supplier, predi
+            //da se iztriqt vsichki Conformities, koito sa s tozi Supplier
+
+
 
             //da setna da se nulira zapisa na SupplierID v Article pri del 
             //na Supplier - TODO! 
