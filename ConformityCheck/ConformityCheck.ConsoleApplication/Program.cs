@@ -20,62 +20,62 @@ namespace ConformityCheck.ConsoleApplication
 
             IArticleService articleService = new ArticleService(db);
 
-            //articleService.Create(new ArticleImportDTO
-            //{
-            //    Number = "7421273-09",
-            //    Description = "Strip for absteller",
-            //    SupplierNumber = "0085657",
-            //    SupplierName = "Intechna",
-            //    SupplierEmail = "a@abv.bg",
-            //    SupplierPhoneNumber = "02343423",
-            //    ContactPersonFirstName = "Atanas",
-            //    ContactPersonLastName = "Moskov"
-            //});
+            articleService.Create(new ArticleImportDTO
+            {
+                Number = "7421273-09",
+                Description = "Strip for absteller",
+                SupplierNumber = "0085657",
+                SupplierName = "Intechna",
+                SupplierEmail = "a@abv.bg",
+                SupplierPhoneNumber = "02343423",
+                ContactPersonFirstName = "Atanas",
+                ContactPersonLastName = "Moskov"
+            });
 
-            //articleService.Create(new ArticleImportDTO
-            //{
-            //    Number = "4442344-09",
-            //    Description = "Strip for absteller",
-            //    SupplierNumber = "0096362",
-            //    SupplierName = "TEHERasda",
-            //    SupplierEmail = "a@abv.bg",
-            //    SupplierPhoneNumber = "02343423",
-            //    ContactPersonFirstName = "asDe",
-            //    ContactPersonLastName = "ReFFF   "
-            //});
+            articleService.Create(new ArticleImportDTO
+            {
+                Number = "4442344-09",
+                Description = "Strip for absteller",
+                SupplierNumber = "0096362",
+                SupplierName = "TEHERasda",
+                SupplierEmail = "a@abv.bg",
+                SupplierPhoneNumber = "02343423",
+                ContactPersonFirstName = "asDe",
+                ContactPersonLastName = "ReFFF   "
+            });
 
-            //articleService.Create(new ArticleImportDTO
-            //{
-            //    Number = "11111-09",
-            //    Description = "Strip for absteller",
-            //    SupplierNumber = "222222",
-            //    SupplierName = "Assssssss",
-            //    SupplierEmail = "a@abv.bg",
-            //    SupplierPhoneNumber = "02343423",
-            //    ContactPersonFirstName = "asDe",
-            //    ContactPersonLastName = "ReFFF   "
-            //});
+            articleService.Create(new ArticleImportDTO
+            {
+                Number = "11111-09",
+                Description = "Strip for absteller",
+                SupplierNumber = "222222",
+                SupplierName = "Assssssss",
+                SupplierEmail = "a@abv.bg",
+                SupplierPhoneNumber = "02343423",
+                ContactPersonFirstName = "asDe",
+                ContactPersonLastName = "ReFFF   "
+            });
 
-            //articleService.Create(new ArticleImportDTO
-            //{
-            //    Number = "22222-09",
-            //    Description = "Strip for absteller",
-            //    SupplierNumber = "222222",
-            //    SupplierName = "Assssssss",
-            //    SupplierEmail = "a@abv.bg",
-            //    SupplierPhoneNumber = "02343423",
-            //    ContactPersonFirstName = "asDe",
-            //    ContactPersonLastName = "ReFFF   "
-            //});
+            articleService.Create(new ArticleImportDTO
+            {
+                Number = "22222-09",
+                Description = "Strip for absteller",
+                SupplierNumber = "222222",
+                SupplierName = "Assssssss",
+                SupplierEmail = "a@abv.bg",
+                SupplierPhoneNumber = "02343423",
+                ContactPersonFirstName = "asDe",
+                ContactPersonLastName = "ReFFF   "
+            });
 
-            //var article = db.Articles.FirstOrDefault(x => x.Id == 3);
-            //articleService.AddSupplierToArticle(article, new ArticleImportDTO
-            //{
-            //    Number = article.Number,
-            //    Description = article.Description,
-            //    SupplierNumber = "0099999",
-            //    SupplierName = "PAN",
-            //});
+            var article = db.Articles.FirstOrDefault(x => x.Id == 3);
+            articleService.AddSupplierToArticle(article, new ArticleImportDTO
+            {
+                Number = article.Number,
+                Description = article.Description,
+                SupplierNumber = "0099999",
+                SupplierName = "PAN",
+            });
 
             //articleService.DeleteArticle(4);
 
