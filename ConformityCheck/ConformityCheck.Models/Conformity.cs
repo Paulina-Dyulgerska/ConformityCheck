@@ -29,9 +29,13 @@ namespace ConformityCheck.Models
 
         public DateTime? ConformationAcceptanceDate { get; set; }
 
-        public bool IsConfirmed { get; set; }
+        public bool IsAccepted { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public bool IsValid { get; set; }
+
+        public string Comments { get; set; }
 
         public virtual ICollection<ArticleConformity> ArticleConformities { get; set; }
 

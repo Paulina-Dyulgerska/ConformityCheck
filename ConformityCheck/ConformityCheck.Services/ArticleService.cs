@@ -141,11 +141,59 @@ namespace ConformityCheck.Services
             return this.db.SaveChanges(); //async-await
         }
 
-        public void AddConformity(int articleId)
+        public void AddConformityToArticle(int articleId, int supplierId, ArticleConformityImportDTO articleConformityImportDTO)
+        {
+            var supplierEntity = this.GetSupplier(supplierId);
+            var articleEntity = this.GetArticle(articleId);
+
+            if (articleEntity == null)
+            {
+                throw new ArgumentException("No such article");
+            }
+
+            if (supplierEntity == null)
+            {
+                throw new ArgumentException("No such supplier");
+            }
+
+            var articleSuppliers = this.GetSuppliersIdsList(articleId);
+
+            if (!articleSuppliers.Contains(supplierId))
+            {
+                throw new ArgumentException("The article does not have such supplier.");
+            }
+
+            var conformityType = this.db.ConformityTypes
+                .FirstOrDefault(ct => ct.Description == articleConformityImportDTO.ConformityType.Trim().ToUpper());
+
+            if (conformityType == null)
+            {
+                throw new ArgumentException("No such conformity type.");
+            }
+
+            var conformity = new Conformity
+            {
+                ConformityTypeId = conformityType.Id,
+                IssueDate = articleConformityImportDTO.IssueDate,
+                ConformationAcceptanceDate = articleConformityImportDTO.ConformationAcceptanceDate,
+                IsAccepted = articleConformityImportDTO.IsAssepted,
+                IsValid = true,
+            };
+
+            this.db.Conformities.Add(conformity);
+
+            articleEntity.ArticleConformities.Add(new ArticleConformity
+            {
+                Article = articleEntity,
+                Conformity = conformity,
+            });
+
+            this.db.SaveChanges(); //TODO async-await
+        }
+        public void DeleteConformity(int articleId)
         {
             throw new NotImplementedException();
         }
-
         public void UpdateArticle(ArticleImportDTO articleImportDTO)
         {
             var articleEntity = this.db.Articles.FirstOrDefault(x => x.Number == articleImportDTO.Number.Trim().ToUpper());
@@ -159,16 +207,17 @@ namespace ConformityCheck.Services
 
             articleEntity.Description = PascalCaseConverter(articleImportDTO.Description);
 
-            //TODO - all other article characteristics have to be able to be deleted.
-            //Suppliers
-            //Conformities
-            //Products
-            //Sustances
+            //TODO - all other article characteristics have to be able to be updated from this method!!! S buttons +add +add na vseki 
+            //supplier, product, substance i t.n. A otstrani shte ima - za delete na vseki zapis!!!
+            //Suppliers - AddSupplierToArticle, DeleteSupplierFromArticle
+            //Conformities -AddConformity, DeleteConformity
+            //Products - ListArticleProducts only, no delete
+            //Sustances - Add/DeleteSubstance!!!! To have it in the interface
 
             this.db.SaveChanges(); //TODO - async-await
         }
 
-        public IEnumerable<ConformityDTO> ListArticleConformities(int articleId)
+        public IEnumerable<ConformityImportDTO> ListArticleConformities(int articleId)
         {
             throw new NotImplementedException();
         }
@@ -182,22 +231,22 @@ namespace ConformityCheck.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ArticleExportDTO> SearchArticle(int artileId)
+        public IEnumerable<ArticleExportDTO> SearchByArticleNumber(int artileId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ArticleExportDTO> SearchByConformity(string conformityType)
+        public IEnumerable<ArticleExportDTO> SearchByConformityType(string conformityType)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ArticleExportDTO> SearchByStatus(string status)
+        public IEnumerable<ArticleExportDTO> SearchByConfirmedStatus(string status)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<ArticleExportDTO> SearchBySupplier(string supplierNumber)
+        public IEnumerable<ArticleExportDTO> SearchBySupplierNumber(string supplierNumber)
         {
             throw new NotImplementedException();
         }
@@ -212,7 +261,7 @@ namespace ConformityCheck.Services
             return this.db.Suppliers.FirstOrDefault(x => x.Id == supplierId);
         }
 
-        public IEnumerable<string> GetSuppliersNuumbersList(int articleId)
+        public IEnumerable<string> GetSuppliersNumbersList(int articleId)
         {
             return db.Articles.Where(x => x.Id == articleId).Select(x => x.ArticleSuppliers.Select(s => s.Supplier.Number)).FirstOrDefault();
         }
