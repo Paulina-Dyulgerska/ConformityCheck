@@ -4,8 +4,10 @@ using ConformityCheck.Services;
 using ConformityCheck.Services.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace ConformityCheck.ConsoleApplication
 {
@@ -20,62 +22,62 @@ namespace ConformityCheck.ConsoleApplication
 
             IArticleService articleService = new ArticleService(db);
 
-            articleService.Create(new ArticleImportDTO
-            {
-                Number = "7421273-09",
-                Description = "Strip for absteller",
-                SupplierNumber = "0085657",
-                SupplierName = "Intechna",
-                SupplierEmail = "a@abv.bg",
-                SupplierPhoneNumber = "02343423",
-                ContactPersonFirstName = "Atanas",
-                ContactPersonLastName = "Moskov"
-            });
+            //articleService.Create(new ArticleImportDTO
+            //{
+            //    Number = "7421273-09",
+            //    Description = "Strip for absteller",
+            //    SupplierNumber = "0085657",
+            //    SupplierName = "Intechna",
+            //    SupplierEmail = "a@abv.bg",
+            //    SupplierPhoneNumber = "02343423",
+            //    ContactPersonFirstName = "Atanas",
+            //    ContactPersonLastName = "Moskov"
+            //});
 
-            articleService.Create(new ArticleImportDTO
-            {
-                Number = "4442344-09",
-                Description = "Strip for absteller",
-                SupplierNumber = "0096362",
-                SupplierName = "TEHERasda",
-                SupplierEmail = "a@abv.bg",
-                SupplierPhoneNumber = "02343423",
-                ContactPersonFirstName = "asDe",
-                ContactPersonLastName = "ReFFF   "
-            });
+            //articleService.Create(new ArticleImportDTO
+            //{
+            //    Number = "4442344-09",
+            //    Description = "Strip for absteller",
+            //    SupplierNumber = "0096362",
+            //    SupplierName = "TEHERasda",
+            //    SupplierEmail = "a@abv.bg",
+            //    SupplierPhoneNumber = "02343423",
+            //    ContactPersonFirstName = "asDe",
+            //    ContactPersonLastName = "ReFFF   "
+            //});
 
-            articleService.Create(new ArticleImportDTO
-            {
-                Number = "11111-09",
-                Description = "Strip for absteller",
-                SupplierNumber = "222222",
-                SupplierName = "Assssssss",
-                SupplierEmail = "a@abv.bg",
-                SupplierPhoneNumber = "02343423",
-                ContactPersonFirstName = "asDe",
-                ContactPersonLastName = "ReFFF   "
-            });
+            //articleService.Create(new ArticleImportDTO
+            //{
+            //    Number = "11111-09",
+            //    Description = "Strip for absteller",
+            //    SupplierNumber = "222222",
+            //    SupplierName = "Assssssss",
+            //    SupplierEmail = "a@abv.bg",
+            //    SupplierPhoneNumber = "02343423",
+            //    ContactPersonFirstName = "asDe",
+            //    ContactPersonLastName = "ReFFF   "
+            //});
 
-            articleService.Create(new ArticleImportDTO
-            {
-                Number = "22222-09",
-                Description = "Strip for absteller",
-                SupplierNumber = "222222",
-                SupplierName = "Assssssss",
-                SupplierEmail = "a@abv.bg",
-                SupplierPhoneNumber = "02343423",
-                ContactPersonFirstName = "asDe",
-                ContactPersonLastName = "ReFFF   "
-            });
+            //articleService.Create(new ArticleImportDTO
+            //{
+            //    Number = "22222-09",
+            //    Description = "Strip for absteller",
+            //    SupplierNumber = "222222",
+            //    SupplierName = "Assssssss",
+            //    SupplierEmail = "a@abv.bg",
+            //    SupplierPhoneNumber = "02343423",
+            //    ContactPersonFirstName = "asDe",
+            //    ContactPersonLastName = "ReFFF   "
+            //});
 
-            var article = db.Articles.FirstOrDefault(x => x.Id == 3);
-            articleService.AddSupplierToArticle(article, new ArticleImportDTO
-            {
-                Number = article.Number,
-                Description = article.Description,
-                SupplierNumber = "0099999",
-                SupplierName = "PAN",
-            });
+            //var article = db.Articles.FirstOrDefault(x => x.Id == 3);
+            //articleService.AddSupplierToArticle(article, new ArticleImportDTO
+            //{
+            //    Number = article.Number,
+            //    Description = article.Description,
+            //    SupplierNumber = "0099999",
+            //    SupplierName = "PAN",
+            //});
 
             //articleService.DeleteArticle(4);
 
@@ -85,12 +87,29 @@ namespace ConformityCheck.ConsoleApplication
 
             //articleService.DeleteSupplierFromArticle(2, 4);
 
-            articleService.AddConformityToArticle(2, 4, new ArticleConformityImportDTO
+            //var conformityList = new List<ConformityType>{
+            //    new ConformityType { Description = "RoHS"},
+            //    new ConformityType { Description = "REACh"},
+            //    new ConformityType { Description = "FC_EU"},
+            //    new ConformityType { Description = "FC_USA"},
+            //    new ConformityType { Description = "FC_CHINA"},
+            //    new ConformityType { Description = "SVHC"},
+            //    new ConformityType { Description = "DS_Substance"},
+            //    new ConformityType { Description = "DS_FC_EU"},
+            //    new ConformityType { Description = "DS_FC_CHINA"},
+            //    new ConformityType { Description = "DS_FC_USA"}
+
+            //};
+            //db.ConformityTypes.AddRange(conformityList);
+            //db.SaveChanges();
+
+            articleService.AddConformityToArticle(3, 3, new ArticleConformityImportDTO
             {
                 ConformityType = "RoHS",
                 IsAssepted = true,
                 IssueDate = DateTime.UtcNow.AddDays(-10),
                 ConformationAcceptanceDate = DateTime.UtcNow,
+                Comments = "No temperatures in the DoC",
             });
 
 
