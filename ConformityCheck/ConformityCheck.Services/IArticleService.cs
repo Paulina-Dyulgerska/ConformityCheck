@@ -31,6 +31,7 @@ namespace ConformityCheck.Services
 
         public void UpdateArticle(ArticleImportDTO articleImportDTO);
 
+<<<<<<< HEAD
         public void AddConformityToArticle(int articleId, int supplierId, ArticleConformityImportDTO articleConformityImportDTO);
 
         public void DeleteConformity(int articleId);
@@ -41,6 +42,17 @@ namespace ConformityCheck.Services
 
         public IEnumerable<ArticleExportDTO> SearchByConformityType(string conformityType);
 
+=======
+        public void AddConformity(int articleId);
+        public void DeleteConformity(int articleId);
+
+        public IEnumerable<ArticleExportDTO> SearchByArticleNumber(int artileId);
+
+        public IEnumerable<ArticleExportDTO> SearchBySupplierNumber(string supplierNumber);
+
+        public IEnumerable<ArticleExportDTO> SearchByConformityType(string conformityType);
+
+>>>>>>> 992932ed973c22a65cb4ab45f36ebb63e9c4a67b
         public IEnumerable<ArticleExportDTO> SearchByConfirmedStatus(string status); //confirmed or not
 
 

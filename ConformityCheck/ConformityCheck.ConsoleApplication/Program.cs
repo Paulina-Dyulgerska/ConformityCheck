@@ -83,7 +83,17 @@ namespace ConformityCheck.ConsoleApplication
 
             //articleService.DeleteSupplierFromArticle(1, 1);
 
-            articleService.DeleteSupplierFromArticle(31, 1);
+            //articleService.DeleteSupplierFromArticle(2, 4);
+
+            articleService.AddConformityToArticle(2, 4, new ArticleConformityImportDTO
+            {
+                ConformityType = "RoHS",
+                IsAssepted = true,
+                IssueDate = DateTime.UtcNow.AddDays(-10),
+                ConformationAcceptanceDate = DateTime.UtcNow,
+            });
+
+
         }
     }
 
@@ -106,9 +116,18 @@ namespace ConformityCheck.ConsoleApplication
             var bCount = db.Articles.Where(x => x.Id == 6).Select(x => x.ArticleSuppliers).FirstOrDefault();
             var ld = articleService.GetSuppliersNumbersList(db.Articles.Where(x => x.Id == 5).FirstOrDefault().Id);
             var bSupplierNumber = db.Articles
-    .Where(x => x.Id == 5)
-    .Select(x => x.ArticleSuppliers.Select(s => s.Supplier.Number))
-    .FirstOrDefault();
+                                    .Where(x => x.Id == 5)
+                                    .Select(x => x.ArticleSuppliers.Select(s => s.Supplier.Number))
+                                    .FirstOrDefault();
+
+            //
+            var g = db.Articles.Where(a => a.Id == 2).Select(a => new
+            {
+                Nomer = a.Number,
+                ArticleSupplier = a.ArticleSuppliers.ToList(),
+            }).FirstOrDefault();
+            g.ArticleSupplier.Clear();
+            //db.SaveChanges(); //tova ne vliqe na DB-a, zashtoto g ne e ot DB-a, a e samo v pametta na programata mi!!!
         }
     }
 }
