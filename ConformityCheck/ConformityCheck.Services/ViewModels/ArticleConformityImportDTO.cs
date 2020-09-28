@@ -16,6 +16,7 @@ namespace ConformityCheck.Services.ViewModels
 
         public bool IsAssepted { get; set; }
 
+        public string Comments { get; set; }
         //the file of the conformity itseld? should be stored in the DB.
     }
 }

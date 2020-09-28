@@ -163,6 +163,9 @@ namespace ConformityCheck.Services
                 throw new ArgumentException("The article does not have such supplier.");
             }
 
+            //to create table in the DB ArticleConformitys as a DBSet, to make all DBSets ending s or without s!!! But similar!!
+            //to chech dali veche nqmam takowa conformity na tozi article s tozi dostawchik!!!!
+
             var conformityType = this.db.ConformityTypes
                 .FirstOrDefault(ct => ct.Description == articleConformityImportDTO.ConformityType.Trim().ToUpper());
 
@@ -171,6 +174,7 @@ namespace ConformityCheck.Services
                 throw new ArgumentException("No such conformity type.");
             }
 
+
             var conformity = new Conformity
             {
                 ConformityTypeId = conformityType.Id,
@@ -178,9 +182,12 @@ namespace ConformityCheck.Services
                 ConformationAcceptanceDate = articleConformityImportDTO.ConformationAcceptanceDate,
                 IsAccepted = articleConformityImportDTO.IsAssepted,
                 IsValid = true,
+                SupplierId = supplierEntity.Id,
+                Comments = articleConformityImportDTO.Comments,
             };
 
             this.db.Conformities.Add(conformity);
+
 
             articleEntity.ArticleConformities.Add(new ArticleConformity
             {
