@@ -28,14 +28,14 @@ namespace ConformityCheck.ConsoleApplication
 
             //articleService.DeleteSupplierFromArticle(2, 4);
 
-            articleService.AddConformityToArticle(5, 4, new ArticleConformityImportDTO
-            {
-                ConformityType = "RoHS1",
-                IsAssepted = true,
-                IssueDate = DateTime.UtcNow.AddDays(-10),
-                ConformationAcceptanceDate = DateTime.UtcNow,
-                Comments = "No temperatures in the DoC",
-            });
+            //articleService.AddConformityToArticle(5, 4, new ArticleConformityImportDTO
+            //{
+            //    ConformityType = "RoHS1",
+            //    IsAssepted = true,
+            //    IssueDate = DateTime.UtcNow.AddDays(-10),
+            //    ConformationAcceptanceDate = DateTime.UtcNow,
+            //    Comments = "No temperatures in the DoC",
+            //});
 
             //var r = conformityTypeService.ListAllConformityTypes();
             //var r = conformityTypeService.Delete(2);
