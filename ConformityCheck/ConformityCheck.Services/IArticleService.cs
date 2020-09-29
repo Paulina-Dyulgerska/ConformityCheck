@@ -6,42 +6,42 @@ namespace ConformityCheck.Services
 {
     public interface IArticleService
     {
-        public Article GetArticle(int articleId);
+        Article GetArticle(int articleId);
 
-        public Supplier GetSupplier(int supplierId);
+        Supplier GetSupplier(int supplierId);
        
-        public void Create(ArticleImportDTO articleImportDTO);
+        void Create(ArticleImportDTO articleImportDTO);
 
-        public void AddSupplierToArticle(Article article, ArticleImportDTO articleImportDTO);
+        void AddSupplierToArticle(Article article, ArticleImportDTO articleImportDTO);
 
-        public Supplier GetOrCreateSupplier(ArticleImportDTO articleImportDTO);
+        Supplier GetOrCreateSupplier(ArticleImportDTO articleImportDTO);
 
-        public int DeleteArticle(int articleId);
+        int DeleteArticle(int articleId);
 
-        public void DeleteSupplierFromArticle(int articleId, int supplierId);
+        void DeleteSupplierFromArticle(int articleId, int supplierId);
 
-        public IEnumerable<string> GetSuppliersNumbersList(int articleId);
-        public int GetSuppliersCount(int articleId);
+        IEnumerable<string> GetSuppliersNumbersList(int articleId);
+        int GetSuppliersCount(int articleId);
 
 
-        public IEnumerable<SupplierExportDTO> ListArticleSuppliers(int articleId);
+        IEnumerable<SupplierExportDTO> ListArticleSuppliers(int articleId);
 
-        public IEnumerable<ConformityImportDTO> ListArticleConformities(int articleId);
-        public IEnumerable<ProductDTO> ListArticleProducts(int articleId);
+        IEnumerable<ConformityImportDTO> ListArticleConformities(int articleId);
+        IEnumerable<ProductDTO> ListArticleProducts(int articleId);
 
-        public void UpdateArticle(ArticleImportDTO articleImportDTO);
+        void UpdateArticle(ArticleImportDTO articleImportDTO);
 
-        public void AddConformityToArticle(int articleId, int supplierId, ArticleConformityImportDTO articleConformityImportDTO);
+        void AddConformityToArticle(int articleId, int supplierId, ArticleConformityImportDTO articleConformityImportDTO);
 
-        public void DeleteConformity(int articleId);
+        void DeleteConformity(int articleId);
 
-        public IEnumerable<ArticleExportDTO> SearchByArticleNumber(int artileId);
+        IEnumerable<ArticleExportDTO> SearchByArticleNumber(int artileId); //part of the number
 
-        public IEnumerable<ArticleExportDTO> SearchBySupplierNumber(string supplierNumber);
+        IEnumerable<ArticleExportDTO> SearchBySupplierNumber(string supplierNumber);
 
-        public IEnumerable<ArticleExportDTO> SearchByConformityType(string conformityType);
+        IEnumerable<ArticleExportDTO> SearchByConformityType(string conformityType);
 
-        public IEnumerable<ArticleExportDTO> SearchByConfirmedStatus(string status); //confirmed or not
+        IEnumerable<ArticleExportDTO> SearchByConfirmedStatus(string status); //confirmed or not
 
 
 
