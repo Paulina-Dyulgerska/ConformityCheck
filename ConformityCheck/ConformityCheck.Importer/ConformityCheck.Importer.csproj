@@ -10,4 +10,13 @@
     <ProjectReference Include="..\ConformityCheck.Services\ConformityCheck.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="ArticlesData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="ConformityTypesData.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

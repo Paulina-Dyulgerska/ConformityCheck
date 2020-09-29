@@ -1,9 +1,14 @@
 ﻿using ConformityCheck.Services.ViewModels;
+using System.Collections.Generic;
 
 namespace ConformityCheck.Services
 {
     public interface IConformityTypeService
     {
-        public void Create(ConformityTypeImputDTO conformityTypeImputDTO);
+        void Create(ConformityTypeDTO conformityTypeImputDTO);
+
+        IEnumerable<ConformityTypeDTO> ListAllConformityTypes();
+
+        int Delete(int conformityTypeId);
     }
 }

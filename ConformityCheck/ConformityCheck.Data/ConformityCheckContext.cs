@@ -30,6 +30,17 @@ namespace ConformityCheck.Data
 
         public DbSet<ArticleSupplier> ArticleSuppliers { get; set; }
 
+        public DbSet<ArticleConformity> ArticleConformities { get; set; }
+
+        public DbSet<ArticleProduct> ArticleProducts { get; set; }
+
+        public DbSet<ArticleSubstance> ArticleSubstances { get; set; }
+
+        public DbSet<ProductConformity> ProductConformities { get; set; }
+
+        public DbSet<SubstanceRegulationList> SubstanceRegulationLists { get; set; }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

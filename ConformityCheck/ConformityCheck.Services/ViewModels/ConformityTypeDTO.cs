@@ -1,6 +1,6 @@
 ﻿namespace ConformityCheck.Services.ViewModels
 {
-    public class ConformityTypeImputDTO
+    public class ConformityTypeDTO
     {
         public string Description { get; set; }
     }

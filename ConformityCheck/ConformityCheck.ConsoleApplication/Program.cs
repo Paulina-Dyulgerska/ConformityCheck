@@ -1,13 +1,10 @@
 ﻿using ConformityCheck.Data;
-using ConformityCheck.Models;
 using ConformityCheck.Services;
 using ConformityCheck.Services.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace ConformityCheck.ConsoleApplication
 {
@@ -21,6 +18,7 @@ namespace ConformityCheck.ConsoleApplication
             db.Database.Migrate();
 
             IArticleService articleService = new ArticleService(db);
+            IConformityTypeService conformityTypeService = new ConformityTypeService(db);
 
             //articleService.DeleteArticle(4);
 
@@ -30,7 +28,7 @@ namespace ConformityCheck.ConsoleApplication
 
             //articleService.DeleteSupplierFromArticle(2, 4);
 
-            articleService.AddConformityToArticle(3, 3, new ArticleConformityImportDTO
+            articleService.AddConformityToArticle(5, 4, new ArticleConformityImportDTO
             {
                 ConformityType = "RoHS",
                 IsAssepted = true,
@@ -39,6 +37,8 @@ namespace ConformityCheck.ConsoleApplication
                 Comments = "No temperatures in the DoC",
             });
 
+            //var r = conformityTypeService.ListAllConformityTypes();
+            //var r = conformityTypeService.Delete(2);
         }
     }
 

@@ -174,6 +174,7 @@ namespace ConformityCheck.Services
                 throw new ArgumentException("No such conformity type.");
             }
 
+            //if such conformity type already exist, what we are doing?
 
             var conformity = new Conformity
             {
@@ -197,7 +198,7 @@ namespace ConformityCheck.Services
 
             this.db.SaveChanges(); //TODO async-await
         }
-        public void DeleteConformity(int articleId)
+        public void DeleteConformity(int articleId) //update conformity with new one????
         {
             throw new NotImplementedException();
         }

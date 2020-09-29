@@ -40,7 +40,7 @@ namespace ConformityCheck.Importer
             //Add conformity types:
             IConformityTypeService conformityTypeService = new ConformityTypeService(db);
             var jsonConformityTypes = File.ReadAllText("ConformityTypesData.json");
-            var conformityTypes = JsonSerializer.Deserialize<IEnumerable<ConformityTypeImputDTO>>(jsonConformityTypes);
+            var conformityTypes = JsonSerializer.Deserialize<IEnumerable<ConformityTypeDTO>>(jsonConformityTypes);
 
             foreach (var conformityType in conformityTypes)
             {
