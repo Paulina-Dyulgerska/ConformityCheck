@@ -30,7 +30,7 @@ namespace ConformityCheck.ConsoleApplication
 
             articleService.AddConformityToArticle(5, 4, new ArticleConformityImportDTO
             {
-                ConformityType = "RoHS",
+                ConformityType = "RoHS1",
                 IsAssepted = true,
                 IssueDate = DateTime.UtcNow.AddDays(-10),
                 ConformationAcceptanceDate = DateTime.UtcNow,
