@@ -1,6 +1,6 @@
 ﻿using ConformityCheck.Data;
 using ConformityCheck.Services;
-using ConformityCheck.Services.ViewModels;
+using ConformityCheck.Services.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;

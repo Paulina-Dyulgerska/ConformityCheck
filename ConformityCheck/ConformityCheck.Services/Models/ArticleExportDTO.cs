@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConformityCheck.Services.ViewModels
+namespace ConformityCheck.Services.Models
 {
     public class ArticleExportDTO
     {

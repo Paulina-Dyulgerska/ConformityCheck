@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ConformityCheck.Services.ViewModels
+namespace ConformityCheck.Services.Models
 {
     public class ArticleImportDTO
     {

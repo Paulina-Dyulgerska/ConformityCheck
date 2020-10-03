@@ -1,5 +1,5 @@
 ﻿using ConformityCheck.Models;
-using ConformityCheck.Services.ViewModels;
+using ConformityCheck.Services.Models;
 using System.Collections.Generic;
 
 namespace ConformityCheck.Services
