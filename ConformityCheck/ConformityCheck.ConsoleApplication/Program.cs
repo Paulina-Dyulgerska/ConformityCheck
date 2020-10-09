@@ -71,6 +71,25 @@ namespace ConformityCheck.ConsoleApplication
             //obekta, kojto dyrpat ot DB-a!!! T.e.mappinga se pravi ot DB model prez mapper do towa, koeto mi trqbwa v services kato class za da rabotqt
             //tezi services s tochno nujniqt im class!!!!! Za da polzwam tezi neshta v services, trqbwa da pravq Templateni methodite tam i te da
             //polzwat Templateni classove - taka stawat preizpolzwaemi!!!! 
+
+            //TODO: da si napravq edna ogromna zaqwka i da si vzema vsichki danni ot DB-a v edin ViewModel,
+            //a posle v prezentacionnata logika v samoto View chrez Razor
+            //az moga da vzema ot veche vyrnatite danni, samo 20 naprimer. Towa e prezentacionna logika i nejnoto mqsto e
+            //ne v servica, a vyv View-to. Zashtoto towa View moje da iska 20, ama drugi View moje da iska 100 ot tezi entities,
+            //zatowa e typo da pravq otdelni methods v service, za 20 i za 100, a e po-dobre da sa vsichki v edna collection, a
+            //posle v samite View-ta da wzimam kakwoto mi trqbwa ot tazi collection.
+
+            //TODO: Da vzema pageing of presscenter na NIKI i taka da si vizualiziram artikulite i productite.
+
+            //TODO: conformity type i supplier number da mi se izbirat ot padashto menu, kakto i suppliername.
+
+            //TODO: vzimam si ot bootstrap css faila  mu + elementi ot free tema, koqto sym si haresala - te sa v html faila i
+            //slagam si gi v moq kod i tolkowa.
+
+            //TODO:Ako iskam da imam update-nata info za moite imoti, trqbwa da zakacha sybiracha na oferti ot imot.bg i da 
+            //go sloja v moeto prilojenie
+            //da se izpylnqwa na opredelen period ot vreme. Imam tools za towa -kato Hangfire, tazi library izpylnqwa daden cod 
+            //prez opredeleno vreme. taka da si update-vam SubstanceLists
         }
     }
 
