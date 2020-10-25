@@ -90,6 +90,13 @@ namespace ConformityCheck.ConsoleApplication
             //go sloja v moeto prilojenie
             //da se izpylnqwa na opredelen period ot vreme. Imam tools za towa -kato Hangfire, tazi library izpylnqwa daden cod 
             //prez opredeleno vreme. taka da si update-vam SubstanceLists
+
+            //Da si napravq Edit - puskam view syshtoto kato na add, no v nego si zarejdam dannite ot model, vzet ot DB-a
+            //vyv formata si slagam stojnostite polucheni ot DB za otdelnite propertyta na modela!!
+            //sled tova si pish v edno hidden pole id-to na modela ot DB-a:
+            //pod <form> si slagam <input type="hidden" name="id" value="@Model.Id"> i posle si prochitam towa
+            //id pri post requesta za edit i si go updatewam v DB-a tochno tozi id s novite danni, koito sa doshli za nego.
+
         }
     }
 
