@@ -97,6 +97,10 @@ namespace ConformityCheck.ConsoleApplication
             //pod <form> si slagam <input type="hidden" name="id" value="@Model.Id"> i posle si prochitam towa
             //id pri post requesta za edit i si go updatewam v DB-a tochno tozi id s novite danni, koito sa doshli za nego.
 
+            //Da vidq ot Consultation day 31.10.2020 kak se pravi startirane na task prez opredeleno vreme - chrez
+            //librarity Hangfire, ima go integrirano c PressCenters na Niki.
+
+            //Kak da si narpavq users s razlichni roli i danni za tqh v EF Core.
         }
     }
 
