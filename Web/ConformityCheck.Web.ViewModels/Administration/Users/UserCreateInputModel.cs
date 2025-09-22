@@ -2,8 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using ConformityCheck.Common.ValidationAttributes;
-    using ConformityCheck.Web.ViewModels.Administration.Roles.ViewComponents;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
 
     public class UserCreateInputModel
     {

@@ -1,8 +1,8 @@
 ﻿namespace ConformityCheck.Web.ViewModels.ConformityTypes
 {
-    using ConformityCheck.Common.ValidationAttributes;
     using ConformityCheck.Data.Models;
     using ConformityCheck.Services.Mapping;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
 
     public class ConformityTypeEditInputModel : ConformityTypeBaseModel, IMapFrom<ConformityType>
     {

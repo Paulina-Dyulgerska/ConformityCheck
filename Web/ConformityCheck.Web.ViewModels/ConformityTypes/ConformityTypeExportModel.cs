@@ -3,9 +3,9 @@
     using System;
 
     using AutoMapper;
-    using ConformityCheck.Common.ValidationAttributes;
     using ConformityCheck.Data.Models;
     using ConformityCheck.Services.Mapping;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
 
     public class ConformityTypeExportModel : IMapFrom<Article>, IMapFrom<ConformityType>, IMapFrom<ArticleConformityType>, IHaveCustomMappings
     {

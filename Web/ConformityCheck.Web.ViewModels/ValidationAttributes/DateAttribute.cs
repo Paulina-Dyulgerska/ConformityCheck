@@ -1,4 +1,4 @@
-﻿namespace ConformityCheck.Common.ValidationAttributes
+﻿namespace ConformityCheck.Web.ViewModels.ValidationAttributes
 {
     using System;
     using System.ComponentModel.DataAnnotations;

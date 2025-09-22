@@ -3,9 +3,9 @@
     using System.Collections.Generic;
 
     using ConformityCheck.Common;
-    using ConformityCheck.Common.ValidationAttributes;
     using ConformityCheck.Data.Models;
     using ConformityCheck.Services.Mapping;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
 
     public class ConformitiesIndexModel : PagingViewModel, IMapFrom<Conformity>
     {

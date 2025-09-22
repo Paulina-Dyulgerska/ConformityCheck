@@ -1,5 +1,6 @@
-﻿namespace ConformityCheck.Common.ValidationAttributes.Tests
+﻿namespace ConformityCheck.Web.ViewModels.Tests
 {
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
     using System;
 
     using Xunit;

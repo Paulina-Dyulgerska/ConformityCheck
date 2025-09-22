@@ -1,6 +1,6 @@
 ﻿namespace ConformityCheck.Web.ViewModels.ContentDelivery
 {
-    using ConformityCheck.Common.ValidationAttributes;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
 
     public class ArticleIdSupplierIdInputModel
     {

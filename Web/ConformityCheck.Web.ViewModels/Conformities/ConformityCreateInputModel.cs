@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using ConformityCheck.Common.ValidationAttributes;
     using ConformityCheck.Services;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
     using Microsoft.AspNetCore.Http;
 
     public class ConformityCreateInputModel : ConformityBaseModel

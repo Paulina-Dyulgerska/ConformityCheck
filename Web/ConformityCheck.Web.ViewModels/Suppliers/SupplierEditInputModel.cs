@@ -2,9 +2,9 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using ConformityCheck.Common.ValidationAttributes;
     using ConformityCheck.Data.Models;
     using ConformityCheck.Services.Mapping;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
     public class SupplierEditInputModel : IMapFrom<Supplier>

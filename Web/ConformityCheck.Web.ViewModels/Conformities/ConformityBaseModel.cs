@@ -5,10 +5,10 @@
     using System.ComponentModel.DataAnnotations;
 
     using AutoMapper;
-    using ConformityCheck.Common.ValidationAttributes;
     using ConformityCheck.Data.Models;
     using ConformityCheck.Services;
     using ConformityCheck.Services.Mapping;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
 
     public abstract class ConformityBaseModel : IMapFrom<Conformity>, IHaveCustomMappings, IValidatableObject
     {

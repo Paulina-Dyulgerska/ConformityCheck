@@ -1,6 +1,6 @@
 ﻿namespace ConformityCheck.Web.ViewModels.ConformityTypes
 {
-    using ConformityCheck.Common.ValidationAttributes;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
 
     public class ConformityTypeDeleteInputModel
     {

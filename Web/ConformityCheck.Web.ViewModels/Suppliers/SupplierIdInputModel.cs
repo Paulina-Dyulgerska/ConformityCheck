@@ -1,6 +1,6 @@
 ﻿namespace ConformityCheck.Web.ViewModels.Suppliers
 {
-    using ConformityCheck.Common.ValidationAttributes;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
 
     public class SupplierIdInputModel
     {

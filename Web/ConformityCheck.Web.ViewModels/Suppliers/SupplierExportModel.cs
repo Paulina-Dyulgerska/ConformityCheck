@@ -1,7 +1,6 @@
 ﻿namespace ConformityCheck.Web.ViewModels.Suppliers
 {
     using AutoMapper;
-    using ConformityCheck.Common.ValidationAttributes;
     using ConformityCheck.Data.Models;
     using ConformityCheck.Services.Mapping;
 

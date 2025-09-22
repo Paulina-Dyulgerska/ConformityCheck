@@ -3,8 +3,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
 
-    using ConformityCheck.Common.ValidationAttributes;
     using ConformityCheck.Data.Models;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;

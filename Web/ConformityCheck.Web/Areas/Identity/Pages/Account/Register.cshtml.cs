@@ -7,10 +7,10 @@
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
-    using ConformityCheck.Common.ValidationAttributes;
     using ConformityCheck.Data.Models;
     using ConformityCheck.Services.Messaging;
     using ConformityCheck.Web.Infrastructure.ValidationAttributes;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;

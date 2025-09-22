@@ -1,6 +1,6 @@
 ﻿namespace ConformityCheck.Web.ViewModels.Conformities
 {
-    using ConformityCheck.Common.ValidationAttributes;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
 
     public class ConformityGetInputModel
     {

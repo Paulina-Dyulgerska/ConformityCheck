@@ -1,13 +1,11 @@
 ﻿namespace ConformityCheck.Web.ViewModels.Conformities
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
 
     using AutoMapper;
-    using ConformityCheck.Common.ValidationAttributes;
     using ConformityCheck.Data.Models;
     using ConformityCheck.Services.Mapping;
-    using Microsoft.AspNetCore.Http;
+    using ConformityCheck.Web.ViewModels.ValidationAttributes;
 
     public class ConformityEditInputModel : ConformityBaseModel, IHaveCustomMappings
     {
