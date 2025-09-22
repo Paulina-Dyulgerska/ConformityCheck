@@ -1,0 +1,54 @@
+﻿<nav>
+    <ul class="nav-list">
+        <li class="submenu-list-item">
+            <span class="btn btn-cta icon-down">Suppliers</span>
+            <ul class="quick-nav-submenu">
+                <li class="list-item">
+                    <a class="" asp-controller="Articles" asp-action="AddSupplier" asp-route-id="@Model.Id">
+                        Add Supplier
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a class="" asp-controller="Articles" asp-action="ChangeMainSupplier" asp-route-id="@Model.Id">
+                        Main Supplier
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a class="" asp-controller="Articles" asp-action="RemoveSupplier" asp-route-id="@Model.Id">
+                        Remove Supplier
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="submenu-list-item">
+            <span class="btn btn-cta icon-down">Conformity types</span>
+            <ul class="quick-nav-submenu">
+                <li class="list-item">
+                    <a class="" asp-controller="Articles" asp-action="AddConformityType" asp-route-id="@Model.Id">
+                        Add conformity type
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a class="" asp-controller="Articles" asp-action="RemoveConformityType" asp-route-id="@Model.Id">
+                        Remove conformity type
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="submenu-list-item">
+            <span class="btn btn-cta icon-down">Conformities</span>
+            <ul class="quick-nav-submenu">
+                <li class="list-item">
+                    <a class="" asp-controller="Conformities" asp-action="AddToArticleConformityType" asp-route-id="@Model.Id">
+                        Add conformity
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a class="" asp-controller="Articles" asp-action="RemoveConformity" asp-route-id="@Model.Id">
+                        Remove conformity
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>

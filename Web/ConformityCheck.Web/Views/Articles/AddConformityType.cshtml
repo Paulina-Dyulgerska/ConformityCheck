@@ -1,0 +1,77 @@
+﻿@model ArticleManageConformityTypesExportModel
+@{
+    this.ViewData["Title"] = "Add conformity type to article";
+}
+
+@section SubMenu{
+    <partial name="_SubMenuEdit" model="Model" />
+}
+
+<section class="display-data-wrapper">
+    <section class="display-data-container">
+
+        <section class="display-data-header">
+            <article class="title-container">
+                <h4 class="title">
+                    @this.ViewData["Title"]
+                </h4>
+            </article>
+        </section>
+
+        <section class="display-data-body">
+            <article class="form-data-container">
+                <article class="data-container article-edit">
+                    <ul>
+                        <li>
+                            Article number:
+                            <strong>@Model.Number</strong>
+                        </li>
+                        <li>
+                            Article's description:
+                            <strong>@Model.Description</strong>
+                        </li>
+                    </ul>
+                </article>
+
+                <form method="post" class="input-group">
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <input asp-for="Id" hidden value="@Model.Id" />
+
+                    <div class="form-field-container">
+                        <label asp-for="ConformityTypeId">
+                            If you want to add a conformity type to the article, please select one from the list:
+                        </label>
+                        <cache expires-after="TimeSpan.FromSeconds(1200)">
+                            <select asp-for="ConformityTypeId" class="form-control">
+                                <vc:conformity-types></vc:conformity-types>
+                            </select>
+                        </cache>
+                        <span asp-validation-for="ConformityTypeId" class="text-danger"></span>
+                    </div>
+
+                    <div class="btns-container">
+                        <div class="form-field-container">
+                            <a asp-action="Edit" class="btn btn-back btn-align-end" asp-route-id="@Model.Id">Return back</a>
+                        </div>
+                        <div class="form-field-container">
+                            <input type="submit" class="btn btn-align-end" value="Save changes" />
+                        </div>
+                    </div>
+                </form>
+            </article>
+
+            <article>
+                <partial name="_ArticleConformityTypesTable" model="Model.ConformityTypes" />
+            </article>
+        </section>
+
+        <section class="display-data-footer ">
+        </section>
+    </section>
+</section>
+
+@section Scripts{
+    <script src="~/js/tables.js" asp-append-version="true"></script>
+}

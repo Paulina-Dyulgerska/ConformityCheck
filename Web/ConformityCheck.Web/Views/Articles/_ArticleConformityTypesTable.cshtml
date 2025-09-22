@@ -1,0 +1,24 @@
+﻿@model IEnumerable<ConformityTypeExportModel>
+
+<section class="table-container table-container-half-size">
+    <article class="table-header">
+        <h6>Article's conformity types:</h6>
+    </article>
+    <table class="table no-cursor-rows-table">
+        <thead>
+            <tr>
+                <th class="col-xl">Conformity Nr.</th>
+                <th class="col-xl">Conformity type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var conformityType in this.Model)
+            {
+            <tr>
+                <td class="col-xl" data-label="Conformity Nr.">@conformityType.Id</td>
+                <td class="col-xl" data-label="Conformity type">@conformityType.Description</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</section>

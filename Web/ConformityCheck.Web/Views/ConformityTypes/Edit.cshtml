@@ -1,0 +1,51 @@
+﻿@model ConformityTypeEditInputModel
+@{
+    this.ViewData["Title"] = "Edit conformity type";
+}
+
+@section SubMenu{
+    <partial name="_SubMenuGeneral" model="Model" />
+}
+
+<section class="display-data-wrapper">
+    <section class="display-data-container">
+
+        <section class="display-data-header">
+            <article class="title-container">
+                <h4 class="title">
+                    @this.ViewData["Title"]
+                </h4>
+            </article>
+        </section>
+
+        <section class="display-data-body">
+            <article class="form-data-container">
+                <form method="post" class="input-group">
+                    @*enctype is multipart/form-data if uploading a file, do not forget to change it*@
+
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <input asp-for="Id" value="@Model.Id" hidden />
+
+                    <div class="form-field-container large-margin-vertical">
+                        <label asp-for="Description"></label>
+                        <input asp-for="Description" class="form-control" placeholder="Conformity type description" autofocus />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="btns-container">
+                        <div class="form-field-container">
+                            <a asp-action="Index" class="btn btn-back btn-align-end">Return back</a>
+                        </div>
+                        <div class="form-field-container">
+                            <input type="submit" class="btn btn-align-end" value="Save changes" />
+                        </div>
+                    </div>
+                </form>
+            </article>
+        </section>
+
+        <section class="display-data-footer ">
+        </section>
+    </section>
+</section>

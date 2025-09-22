@@ -1,0 +1,5 @@
+﻿Tuk slagam vsqkakvi infrastructurni neshta, koito ne sa svyrzani s prezentacionnata chast - s controller, views i t.n.:
+Tag Helpers
+Filters
+Middlewares
+Validational Attributes

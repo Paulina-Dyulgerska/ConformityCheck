@@ -1,0 +1,36 @@
+﻿@model ConformityCheck.Web.ViewModels.Administration.Dashboard.IndexViewModel
+@{
+    this.ViewData["Title"] = "Admin -> Dashboard";
+}
+
+<section class="display-data-wrapper">
+    <section class="display-data-container">
+        <section class="display-data-header">
+            <article class="title-container">
+                <h4 class="title">
+                    @this.ViewData["Title"]
+                </h4>
+            </article>
+        </section>
+        <section class="large-margin-vertical">
+            <article class="large-margin-vertical light-background padding-20 border-radius">
+                <partial name="_InfoForTheProjectPartial" />
+            </article>
+            <article class="large-margin-vertical light-background padding-20 border-radius">
+                <partial name="_InfoForTheUsedTechnologiestPartial" />
+            </article>
+            <article class="center large-margin-vertical light-background padding-20 border-radius">
+                <partial name="_PagePicturesPartial" />
+            </article>
+        </section>
+        <section class="display-data-body">
+            <article class="display-data-body data-container">
+                <p class="center">
+                    Settings: @this.Model.SettingsCount
+                </p>
+            </article>
+        </section>
+        <section class="display-data-footer">
+        </section>
+    </section>
+</section>

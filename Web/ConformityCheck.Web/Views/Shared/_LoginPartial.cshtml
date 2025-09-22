@@ -1,0 +1,37 @@
+﻿@using ConformityCheck.Common
+@using ConformityCheck.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="nav-list nav-right">
+    @if (this.SignInManager.IsSignedIn(this.User))
+    {
+        <li class="list-item">
+            <a class="" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, @(this.User.Identity.Name)!</a>
+        </li>
+        <li class="list-item">
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
+                <button type="submit" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="list-item">
+            <a class="" asp-area="Identity" asp-page="/Account/Register">
+                <i class="fas fa-user-plus"></i>
+                Register
+            </a>
+        </li>
+        <li class="list-item">
+            <a class="" asp-area="Identity" asp-page="/Account/Login">
+                <i class="fas fa-sign-in-alt"></i>
+                Login
+            </a>
+        </li>
+    }
+</ul>
