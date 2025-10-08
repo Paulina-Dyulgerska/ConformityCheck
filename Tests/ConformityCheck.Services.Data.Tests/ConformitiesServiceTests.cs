@@ -11,6 +11,7 @@
     using ConformityCheck.Web.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Caching.Distributed;
+    using Microsoft.Extensions.Logging;
     using MockQueryable.Moq;
     using Moq;
     using Xunit;
@@ -22,7 +23,8 @@
         public ConformitiesServiceTests()
         {
             this.userManager = new Mock<UserManager<ApplicationUser>>(new Mock<IUserStore<ApplicationUser>>().Object, null, null, null, null, null, null, null, null);
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+            var loggerFactory = new Mock<ILoggerFactory>();
+            AutoMapperConfig.RegisterMappings(loggerFactory.Object, typeof(ErrorViewModel).GetTypeInfo().Assembly);
         }
 
         [Fact]

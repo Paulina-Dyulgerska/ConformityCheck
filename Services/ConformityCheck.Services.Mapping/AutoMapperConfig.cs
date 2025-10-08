@@ -1,12 +1,13 @@
 ﻿namespace ConformityCheck.Services.Mapping
 {
+    using AutoMapper;
+    using AutoMapper.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-
-    using AutoMapper;
-    using AutoMapper.Configuration;
 
     public static class AutoMapperConfig
     {
@@ -14,7 +15,7 @@
 
         public static IMapper MapperInstance { get; set; }
 
-        public static void RegisterMappings(params Assembly[] assemblies)
+        public static void RegisterMappings(ILoggerFactory loggerFactory, params Assembly[] assemblies)
         {
             if (initialized)
             {
@@ -48,7 +49,9 @@
                         map.CreateMappings(configuration);
                     }
                 });
-            MapperInstance = new Mapper(new MapperConfiguration(config));
+
+            var mapperConfig = new MapperConfiguration(config, loggerFactory);
+            MapperInstance = new Mapper(mapperConfig);
         }
 
         private static IEnumerable<TypesMap> GetFromMaps(IEnumerable<Type> types)

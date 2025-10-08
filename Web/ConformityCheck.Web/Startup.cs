@@ -147,7 +147,10 @@
             // AutoMapperConfig.RegisterMappings(
             //    typeof(ErrorViewModel).GetTypeInfo().Assembly,
             //    typeof(ApplicationUser).GetTypeInfo().Assembly); //if I need model from this assembly
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
+
+            var loggerFactory = app.ApplicationServices.GetRequiredService<ILoggerFactory>();
+
+            AutoMapperConfig.RegisterMappings(loggerFactory, typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             //// Seed data on application startup
             // using (var serviceScope = app.ApplicationServices.CreateScope())
