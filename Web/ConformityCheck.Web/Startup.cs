@@ -9,7 +9,6 @@
     using ConformityCheck.Data.Common.Repositories;
     using ConformityCheck.Data.Models;
     using ConformityCheck.Data.Repositories;
-    using ConformityCheck.Data.Seeding;
     using ConformityCheck.Services;
     using ConformityCheck.Services.Data;
     using ConformityCheck.Services.Mapping;
@@ -18,11 +17,9 @@
     using ConformityCheck.Web.Infrastructure.Settings;
     using ConformityCheck.Web.Middlewares.ExceptionHandler;
     using ConformityCheck.Web.ViewModels;
-    using ConformityCheck.Web.ViewModels.Administration.Users;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;

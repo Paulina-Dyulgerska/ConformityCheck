@@ -23,9 +23,6 @@
     {
         public static int Main(string[] args)
         {
-            var a = new Test2("Polq", 2021);
-            var b = new Test("Polq", 2021);
-
             Console.WriteLine($"{typeof(Program).Namespace} ({string.Join(" ", args)}) starts working...");
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
@@ -83,6 +80,9 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ISuppliersSeedService, SuppliersSeedService>();
+            services.AddTransient<IConformityTypesSeedService, ConformityTypesSeedService>();
+            services.AddTransient<IArticlesSeedService, ArticlesSeedService>();
         }
     }
 

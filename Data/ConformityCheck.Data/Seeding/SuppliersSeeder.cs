@@ -22,7 +22,7 @@
             }
 
             // CSV import:
-            var fileCsvToCSharp = "../../../ConformityCheck/Data/ConformityCheck.Data/Seeding/DataFiles/Suppliers.csv";
+            var fileCsvToCSharp = "../../../../../../ConformityCheck/Data/ConformityCheck.Data/Seeding/DataFiles/Suppliers.csv";
             var suppliersService = serviceProvider.GetRequiredService<ISuppliersSeedService>();
             var logger = serviceProvider.GetRequiredService<ILogger<ISuppliersSeedService>>();
 

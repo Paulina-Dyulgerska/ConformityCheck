@@ -22,8 +22,7 @@
             }
 
             // CSV import:
-            // var fileCsvToCSharp = "../../../ConformityCheck/Data/ConformityCheck.Data/Seeding/DataFiles/ArticleSupplier - Copy1.csv";
-            var fileCsvToCSharp = "../../../ConformityCheck/Data/ConformityCheck.Data/Seeding/DataFiles/ArticleSupplier.csv";
+            var fileCsvToCSharp = "../../../../../../ConformityCheck/Data/ConformityCheck.Data/Seeding/DataFiles/ArticleSupplier.csv";
             var articleService = serviceProvider.GetRequiredService<IArticlesSeedService>();
 
             using (CsvReader reader = new CsvReader(new StreamReader(fileCsvToCSharp, Encoding.UTF8), CultureInfo.InvariantCulture))

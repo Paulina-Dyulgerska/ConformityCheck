@@ -23,7 +23,7 @@
             }
 
             var jsonAdminUsers = File
-                .ReadAllText("../../../ConformityCheck/Data/ConformityCheck.Data/Seeding/DataFiles/AdminUsers.json");
+                .ReadAllText("../../../../../../ConformityCheck/Data/ConformityCheck.Data/Seeding/DataFiles/AdminUsers.json");
             var adminUsers = JsonSerializer.Deserialize<IEnumerable<AdminUserDTO>>(jsonAdminUsers);
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
 

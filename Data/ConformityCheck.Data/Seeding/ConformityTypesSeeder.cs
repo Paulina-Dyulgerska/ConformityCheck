@@ -21,7 +21,7 @@
             }
 
             var jsonConformityTypes = File
-                .ReadAllText("../../../ConformityCheck/Data/ConformityCheck.Data/Seeding/DataFiles/ConformityTypesData.json");
+                .ReadAllText("../../../../../../ConformityCheck/Data/ConformityCheck.Data/Seeding/DataFiles/ConformityTypesData.json");
             var conformityTypes = JsonSerializer.Deserialize<IEnumerable<ConformityTypeDTO>>(jsonConformityTypes);
             var conformityTypesService = serviceProvider.GetRequiredService<IConformityTypesSeedService>();
 
